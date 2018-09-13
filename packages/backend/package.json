@@ -14,12 +14,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "bookshelf": "^0.13.3",
     "chalk": "^2.4.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "forever": "^0.15.3",
-    "pretty-error": "^2.1.1"
+    "pretty-error": "^2.1.1",
+    "sequelize": "^4.38.1"
   },
   "peerDependencies": {
     "tbd-frontend-name": "*"
