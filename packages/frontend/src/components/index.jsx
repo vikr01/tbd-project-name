@@ -4,17 +4,13 @@ import React from 'react';
 import type { Node } from 'react';
 import { hot } from 'react-hot-loader';
 import { HashRouter as Router } from 'react-router-dom';
+import SignIn from './signIn';
 // import routes from '../routes';
 
-type Props = {
-  title: string,
-};
-
-const App = ({ title }: Props): Node => (
+const App = (): Node => (
   <Router>
     <div>
-      {title}
-
+      <SignIn />
       {/* <Router /> */}
     </div>
   </Router>
