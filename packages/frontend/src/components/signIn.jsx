@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
+import logo from '../../logo.png';
 
 const styles = theme => ({
   layout: {
@@ -47,6 +48,9 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  logo: {
+    width: '50%',
+  },
 });
 
 function checkSuccess(failed) {
@@ -61,7 +65,7 @@ const SignIn = ({ classes, handleSubmit, data }: props) => (
     <CssBaseline />
     <main className={classes.layout}>
       <Paper className={classes.paper}>
-        <Avatar className={classes.avatar} />
+        <img src={logo} className={classes.logo} alt="logo" />
         <Typography variant="headline">Sign in</Typography>
         <form className={classes.form}>
           <FormControl margin="normal" required fullWidth>
