@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,7 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   layout: {
@@ -49,20 +47,23 @@ const styles = theme => ({
   },
 });
 
-function checkSuccess(failed) {
-  if (failed) {
-    return <h3>Invalid username or password!</h3>;
+function handleStatus(status) {
+  console.log(status);
+  if (status === 1) {
+    return <h3>Passwords do not match!</h3>;
+  }
+  if (status === 2) {
+    return <h3>Email address is already used!</h3>;
   }
   return <div />;
 }
 
-const SignIn = ({ classes, handleSubmit, data }: props) => (
+const CreateAccount = ({ classes, handleSignup, status }: props) => (
   <React.Fragment>
     <CssBaseline />
     <main className={classes.layout}>
       <Paper className={classes.paper}>
-        <Avatar className={classes.avatar} />
-        <Typography variant="headline">Sign in</Typography>
+        <Typography variant="headline">Sign up</Typography>
         <form className={classes.form}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -77,6 +78,15 @@ const SignIn = ({ classes, handleSubmit, data }: props) => (
               autoComplete="current-password"
             />
           </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="password2">Password again</InputLabel>
+            <Input
+              name="password2"
+              type="password"
+              id="password2"
+              autoComplete="current-password"
+            />
+          </FormControl>
           <Button
             type="submit"
             fullWidth
@@ -87,20 +97,17 @@ const SignIn = ({ classes, handleSubmit, data }: props) => (
               e.preventDefault();
               const user = document.getElementById('email').value;
               const pass = document.getElementById('password').value;
-              handleSubmit(user, pass);
+              const pass2 = document.getElementById('password2').value;
+              handleSignup(user, pass, pass2);
             }}
           >
-            Sign in
+            Sign Up
           </Button>
-          {checkSuccess(data)}
-          <br />
-          <Link to="/signup" className={classes.signup}>
-            Create Account
-          </Link>
+          {handleStatus(status)}
         </form>
       </Paper>
     </main>
   </React.Fragment>
 );
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(CreateAccount);
