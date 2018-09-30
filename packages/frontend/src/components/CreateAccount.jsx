@@ -8,6 +8,8 @@ import {
   InputLabel,
   Paper,
   Typography,
+  Select,
+  MenuItem,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
@@ -28,7 +30,9 @@ const DisplayStatus = ({ status }: props) => {
 };
 
 class CreateAccount extends React.Component {
-  state = {};
+  state = {
+    accountType: '', // cannot be null as value of a Select cannot be null
+  };
 
   handleEmailChange(e) {
     this.setState({ email: e.target.value });
@@ -44,6 +48,7 @@ class CreateAccount extends React.Component {
 
   render() {
     const { handleSignup, status } = this.props;
+    const { accountType, hideAccountTypeLabel } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -53,12 +58,38 @@ class CreateAccount extends React.Component {
           </Typography>
           <form className="form">
             <FormControl margin="normal" required fullWidth>
+              <InputLabel
+                htmlFor="account_type"
+                disabled={hideAccountTypeLabel}
+              >
+                Account Type
+              </InputLabel>
+              <Select
+                id="account_type"
+                name="account_type"
+                autoFocus
+                value={accountType}
+                onChange={e => {
+                  console.log(e.target.value);
+                  this.setState({
+                    accountType: e.target.value,
+                    hideAccountTypeLabel: e.target.value !== '',
+                  });
+                }}
+              >
+                <MenuItem value="">
+                  <em>Select one</em>
+                </MenuItem>
+                <MenuItem value="Driver">Driver</MenuItem>
+                <MenuItem value="Client">Client</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
               <Input
                 id="email"
                 name="email"
                 autoComplete="email"
-                autoFocus
                 onChange={e => this.handleEmailChange(e)}
               />
             </FormControl>
@@ -94,11 +125,12 @@ class CreateAccount extends React.Component {
                 if (
                   email === undefined ||
                   pass1 === undefined ||
-                  pass2 === undefined
+                  pass2 === undefined ||
+                  accountType === ''
                 ) {
                   return;
                 }
-                handleSignup(email, pass1, pass2);
+                handleSignup(email, pass1, pass2, accountType);
               }}
             >
               Sign Up

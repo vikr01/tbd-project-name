@@ -32,11 +32,12 @@ class SignInController extends React.Component {
     }
   }
 
-  sendSignupRequest = async (user, pass) => {
+  sendSignupRequest = async (user, pass, accountType) => {
     try {
-      const res = await axios.post('/signup', {
+      const res = await axiosClient.post('/signup', {
         user,
         pass,
+        accountType,
       });
       console.log(res); // check if data is a success
       if (res.succcess) {
@@ -49,13 +50,11 @@ class SignInController extends React.Component {
     }
   };
 
-  doSignup = (username, pass1, pass2) => {
-    console.log(pass1);
-    console.log(pass2);
+  doSignup = (username, pass1, pass2, accountType) => {
     if (pass1.localeCompare(pass2) !== 0) {
       this.setState({ signupStatus: "passwords don't match" });
     } else {
-      this.sendSignupRequest(username, pass1);
+      this.sendSignupRequest(username, pass1, accountType);
     }
   };
 
