@@ -37,5 +37,6 @@
     "webpack-merge": "^4.1.4",
     "write-file-webpack-plugin": "^4.4.1"
   },
+  "https_proxy": "http://localhost:5000/",
   "productName": "TBD FRONTEND NAME"
 }
