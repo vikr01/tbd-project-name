@@ -1,9 +1,10 @@
 // @flow
 import '../styles/global.css';
-import React from 'react';
+import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
+import type { AxiosInstance } from 'axios';
 import SignIn from './SignIn';
 import CreateAccount from './CreateAccount';
 
@@ -11,7 +12,7 @@ const axiosClient: AxiosInstance = axios.create({
   baseURL: 'http://localhost:2000',
 });
 
-class SignInController extends React.Component {
+class SignInController extends Component {
   state = {
     status: null,
     signupStatus: null,
@@ -19,16 +20,15 @@ class SignInController extends React.Component {
 
   async doSubmit(username, password) {
     try {
-      const res = await axiosClient.post('/login', {
+      const res = await axiosClient.post('/authenticate', {
         username,
         password,
       });
       console.log(res);
-      this.setState({ status: 'Logging in' });
+      this.setState({ status: 'ok' });
     } catch (error) {
       console.log(error);
       this.setState({ status: 'Unable to connect to server...' }); // Let SignIn know the account was not successful in logging in
-      // history.push('/');
     }
   }
 

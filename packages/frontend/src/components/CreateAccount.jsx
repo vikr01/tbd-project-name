@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Button,
   CssBaseline,
@@ -11,7 +11,6 @@ import {
   Select,
   MenuItem,
 } from '@material-ui/core';
-import PropTypes from 'prop-types';
 
 const DisplayStatus = ({ status }: props) => {
   if (status !== null) {
@@ -29,7 +28,14 @@ const DisplayStatus = ({ status }: props) => {
   return null;
 };
 
-class CreateAccount extends React.Component {
+type Props = {
+  handleSignup: Function,
+  status: string,
+};
+
+export default class CreateAccount extends Component<Props> {
+  props: Props;
+
   state = {
     accountType: '', // cannot be null as value of a Select cannot be null
   };
@@ -50,7 +56,7 @@ class CreateAccount extends React.Component {
     const { handleSignup, status } = this.props;
     const { accountType, hideAccountTypeLabel } = this.state;
     return (
-      <React.Fragment>
+      <Fragment>
         <CssBaseline />
         <Paper className="paper">
           <Typography variant="headline" className="textCenter">
@@ -138,18 +144,7 @@ class CreateAccount extends React.Component {
             <DisplayStatus status={status} />
           </form>
         </Paper>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
-
-CreateAccount.propTypes = {
-  handleSignup: PropTypes.func,
-  status: PropTypes.string,
-};
-CreateAccount.defaultProps = {
-  handleSignup: () => {},
-  status: null,
-};
-
-export default CreateAccount;
