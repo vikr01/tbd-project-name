@@ -3,7 +3,6 @@ import 'dotenv/config';
 import express from 'express';
 import assets from 'tbd-frontend-name';
 import { promisify } from 'util';
-import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import { User } from './entity/User';
 
