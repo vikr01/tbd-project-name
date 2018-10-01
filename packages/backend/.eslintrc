@@ -7,7 +7,8 @@
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
-      "jsx": true
+      "jsx": true,
+      "legacyDecorators": true
     },
     "sourceType": "module"
   },
@@ -24,6 +25,7 @@
     "comma-dangle": 0,
     "import/dynamic-import-chunkname": "error",
     "import/no-commonjs": "error",
+    "import/prefer-default-export": 0,
     "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,
     "no-magic-numbers": 0,
