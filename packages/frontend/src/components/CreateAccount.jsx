@@ -28,6 +28,25 @@ const DisplayStatus = ({ status }: props) => {
   return null;
 };
 
+const SignUpEmailForm = () => (
+  <FormControl margin="normal" required fullWidth>
+    <InputLabel htmlFor="email">Email Address</InputLabel>
+    <Input id="email" name="email" autoComplete="email" />
+  </FormControl>
+);
+
+const SignUpPasswordForm = ({ name, value }: props) => (
+  <FormControl margin="normal" required fullWidth>
+    <InputLabel htmlFor={name}>{value}</InputLabel>
+    <Input
+      name={name}
+      type="password"
+      id={name}
+      autoComplete="current-password"
+    />
+  </FormControl>
+);
+
 type Props = {
   handleSignup: Function,
   status: string,
@@ -40,16 +59,22 @@ export default class CreateAccount extends Component<Props> {
     accountType: '', // cannot be null as value of a Select cannot be null
   };
 
-  handleEmailChange(e) {
-    this.setState({ email: e.target.value });
-  }
-
-  handlePass1Change(e) {
-    this.setState({ pass1: e.target.value });
-  }
-
-  handlePass2Change(e) {
-    this.setState({ pass2: e.target.value });
+  onSubmit(e, handleSignup) {
+    const { accountType } = this.state;
+    e.preventDefault(); // to prevent the form from refreshing every time.
+    const elem = e.target.elements;
+    const email = elem.email.value;
+    const pass1 = elem.password.value;
+    const pass2 = elem.password2.value;
+    if (
+      email === undefined ||
+      pass1 === undefined ||
+      pass2 === undefined ||
+      accountType === ''
+    ) {
+      return;
+    }
+    handleSignup(email, pass1, pass2, accountType);
   }
 
   render() {
@@ -62,7 +87,12 @@ export default class CreateAccount extends Component<Props> {
           <Typography variant="headline" className="textCenter">
             Sign up
           </Typography>
-          <form className="form">
+          <form
+            className="form"
+            onSubmit={e => {
+              this.onSubmit(e, handleSignup);
+            }}
+          >
             <FormControl margin="normal" required fullWidth>
               <InputLabel
                 htmlFor="account_type"
@@ -76,7 +106,6 @@ export default class CreateAccount extends Component<Props> {
                 autoFocus
                 value={accountType}
                 onChange={e => {
-                  console.log(e.target.value);
                   this.setState({
                     accountType: e.target.value,
                     hideAccountTypeLabel: e.target.value !== '',
@@ -90,54 +119,15 @@ export default class CreateAccount extends Component<Props> {
                 <MenuItem value="Client">Client</MenuItem>
               </Select>
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                autoComplete="email"
-                onChange={e => this.handleEmailChange(e)}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={e => this.handlePass1Change(e)}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password2">Confirm Password</InputLabel>
-              <Input
-                name="password2"
-                type="password"
-                id="password2"
-                autoComplete="current-password"
-                onChange={e => this.handlePass2Change(e)}
-              />
-            </FormControl>
+            <SignUpEmailForm />
+            <SignUpPasswordForm name="password" value="Password" />
+            <SignUpPasswordForm name="password2" value="Confirm Password" />
             <Button
               type="submit"
               fullWidth
               variant="raised"
               color="primary"
               className="submit"
-              onClick={e => {
-                e.preventDefault(); // to prevent the form from refreshing every time.
-                const { email, pass1, pass2 } = this.state;
-                if (
-                  email === undefined ||
-                  pass1 === undefined ||
-                  pass2 === undefined ||
-                  accountType === ''
-                ) {
-                  return;
-                }
-                handleSignup(email, pass1, pass2, accountType);
-              }}
             >
               Sign Up
             </Button>
