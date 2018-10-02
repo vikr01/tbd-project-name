@@ -60,35 +60,40 @@ export default class SignInController extends Component {
   };
 
   doSubmit = async (username, password) => {
+    let response;
     try {
-      const res = await axiosClient.post('/authenticate', {
+      response = await axiosClient.post('/authenticate', {
         username,
         password,
       });
-      console.log(res);
-      this.setState({ signinStatus: signinStatusEnums.ok });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       this.setState({ signinStatus: signinStatusEnums.connection_error }); // Let SignIn know the account was not successful in logging in
+      return;
     }
+    console.log(response);
+    this.setState({ signinStatus: signinStatusEnums.ok });
   };
 
   sendSignupRequest = async (user, pass, accountType) => {
+    let response;
     try {
-      const res = await axiosClient.post('/signup', {
+      response = await axiosClient.post('/signup', {
         user,
         pass,
         accountType,
       });
-      console.log(res); // check if data is a success
-      if (res.succcess) {
-        this.setState({ signupStatus: signupStatusEnums.ok });
-      } else {
-        // username must be taken
-        this.setState({ signupStatus: signupStatusEnums.username_taken });
-      }
     } catch (e) {
       this.setState({ signupStatus: signupStatusEnums.connection_error });
+      return;
+    }
+
+    console.log(response); // check if data is a success
+    if (response.succcess) {
+      this.setState({ signupStatus: signupStatusEnums.ok });
+    } else {
+      // username must be taken
+      this.setState({ signupStatus: signupStatusEnums.username_taken });
     }
   };
 
