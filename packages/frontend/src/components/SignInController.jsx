@@ -55,7 +55,7 @@ function signupStatusToString(e: signupStatusEnums): string {
   }
 }
 
-class SignInController extends Component {
+export default class SignInController extends Component {
   state = {
     signinStatus: signinStatusEnums.default,
     signupStatus: signupStatusEnums.default,
@@ -139,5 +139,3 @@ class SignInController extends Component {
     );
   }
 }
-
-export default hot(module)(SignInController);
