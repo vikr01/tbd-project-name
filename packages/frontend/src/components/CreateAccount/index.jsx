@@ -12,50 +12,9 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import type { Node } from 'react';
-
-type DisplayStatusProps = {
-  status: ?string,
-};
-
-export const DisplayStatus = ({ status }: DisplayStatusProps): Node => {
-  if (status !== null) {
-    return (
-      <Typography
-        className="displayErrorSignup"
-        variant="subheading"
-        align="center"
-        color="error"
-      >
-        {status}
-      </Typography>
-    );
-  }
-  return null;
-};
-
-const SignUpEmailForm = (): Node => (
-  <FormControl margin="normal" required fullWidth>
-    <InputLabel htmlFor="email">Email Address</InputLabel>
-    <Input id="email" name="email" autoComplete="email" />
-  </FormControl>
-);
-
-type SignUpPasswordFormProps = {
-  name: string,
-  value: string,
-};
-
-const SignUpPasswordForm = ({ name, value }: SignUpPasswordFormProps): Node => (
-  <FormControl margin="normal" required fullWidth>
-    <InputLabel htmlFor={name}>{value}</InputLabel>
-    <Input
-      name={name}
-      type="password"
-      id={name}
-      autoComplete="current-password"
-    />
-  </FormControl>
-);
+import EmailForm from './EmailForm';
+import PasswordForm from './PasswordForm';
+import CheckStatus from '../CheckStatus';
 
 type Props = {
   handleSignup: Function,
@@ -124,9 +83,9 @@ export default class CreateAccount extends Component<Props> {
                 <MenuItem value="Client">Client</MenuItem>
               </Select>
             </FormControl>
-            <SignUpEmailForm />
-            <SignUpPasswordForm name="password" value="Password" />
-            <SignUpPasswordForm name="password2" value="Confirm Password" />
+            <EmailForm />
+            <PasswordForm name="password" value="Password" />
+            <PasswordForm name="password2" value="Confirm Password" />
             <Button
               type="submit"
               fullWidth
@@ -136,7 +95,7 @@ export default class CreateAccount extends Component<Props> {
             >
               Sign Up
             </Button>
-            <DisplayStatus status={status} />
+            <CheckStatus status={status} />
           </form>
         </Paper>
       </Fragment>

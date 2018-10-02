@@ -6,7 +6,7 @@ import type { Node } from 'react';
 import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import ConfirmButton from './ConfirmButton';
-import CheckStatus from './CheckStatus';
+import CheckStatus from '../CheckStatus';
 import logo from '../../images/logo.png';
 
 type Props = {
