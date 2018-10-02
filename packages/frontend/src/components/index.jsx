@@ -1,6 +1,6 @@
 // @flow
 import '../styles/global.css';
-import React from 'react';
+import React, { Fragment } from 'react';
 import type { Node } from 'react';
 import { hot } from 'react-hot-loader';
 import { HashRouter, Route } from 'react-router-dom';
@@ -21,9 +21,11 @@ const Dashboard = () => (
 
 const App = (): Node => (
   <HashRouter>
-    <Route path={routes.SIGNUP} component={SignIn} />
-    <Route path={routes.DASHBOARD} component={Dashboard} />
-    <HomePage />
+    <Fragment>
+      <Route path={routes.SIGNUP} component={SignIn} />
+      <Route path={routes.DASHBOARD} component={Dashboard} />
+      <HomePage />
+    </Fragment>
   </HashRouter>
 );
 
