@@ -4,16 +4,26 @@ import React from 'react';
 import type { Node } from 'react';
 import { hot } from 'react-hot-loader';
 import { HashRouter, Route } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import SignIn from './SignIn';
+import CreateLoadable from './CreateLoadable';
+import HomePage from './HomePage';
 import routes from '../routes';
+
+const SignIn = () => (
+  <CreateLoadable
+    loader={() => import(/* webpackChunkName: "SignIn" */ './SignIn')}
+  />
+);
+const Dashboard = () => (
+  <CreateLoadable
+    loader={() => import(/* webpackChunkName: "Dashboard" */ './Dashboard')}
+  />
+);
 
 const App = (): Node => (
   <HashRouter>
-    <div>
-      <Route path={routes.SIGNUP} component={SignIn} />
-      <Route path={routes.DASHBOARD} component={Dashboard} />
-    </div>
+    <Route path={routes.SIGNUP} component={SignIn} />
+    <Route path={routes.DASHBOARD} component={Dashboard} />
+    <HomePage />
   </HashRouter>
 );
 
