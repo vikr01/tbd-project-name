@@ -5,14 +5,14 @@ import type { Node } from 'react';
 import { hot } from 'react-hot-loader';
 import { HashRouter, Route } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import SignInController from './SignInController';
-// import routes from '../routes';
+import SignIn from './SignIn';
+import routes from '../routes';
 
 const App = (): Node => (
   <HashRouter>
     <div>
-      <Route path="/(|signup)" component={SignInController} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path={routes.SIGNUP} component={SignIn} />
+      <Route path={routes.DASHBOARD} component={Dashboard} />
     </div>
   </HashRouter>
 );

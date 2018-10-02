@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { InputLabel, Input, FormControl } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import type { Node } from 'react';
 
 const SignInEmailInput = (): Node => (

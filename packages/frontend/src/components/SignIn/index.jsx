@@ -1,46 +1,139 @@
 // @flow
-import React, { Fragment } from 'react';
-import { CssBaseline, Paper, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import type { Node } from 'react';
-import EmailInput from './EmailInput';
-import PasswordInput from './PasswordInput';
-import ConfirmButton from './ConfirmButton';
-import CheckStatus from '../CheckStatus';
-import logo from '../../images/logo.png';
+import React, { Component } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import type { AxiosInstance } from 'axios';
+import Prompt from './Prompt';
+import CreateAccount from '../CreateAccount';
 
-type Props = {
-  handleSubmit: string,
-  status: string,
+const axiosClient: AxiosInstance = axios.create({
+  baseURL: 'http://localhost:2000',
+});
+
+const signinStatusEnums = {
+  ok: 0,
+  connection_error: 1,
+  invalid_credentials: 2,
+  default: 3,
 };
 
-const SignIn = ({ handleSubmit, status }: Props): Node => (
-  <Fragment>
-    <CssBaseline />
-    <Paper className="paper">
-      <img src={logo} className="logo" alt="logo" />
-      <Typography variant="headline" align="center">
-        Sign in
-      </Typography>
-      <form
-        className="form"
-        onSubmit={event => {
-          event.preventDefault();
-          const user = event.target.elements.email.value;
-          const pass = event.target.elements.password.value;
-          handleSubmit(user, pass);
-        }}
-      >
-        <EmailInput />
-        <PasswordInput />
-        <ConfirmButton />
-        <CheckStatus />
-        <Link to="/signup" className="signup">
-          Create Account
-        </Link>
-      </form>
-    </Paper>
-  </Fragment>
-);
+function signinStatusToString(e: signinStatusEnums): string {
+  switch (e) {
+    case signinStatusEnums.ok:
+      return 'Logging in...';
+    case signinStatusEnums.connection_error:
+      return 'Unable to connect to server.';
+    case signinStatusEnums.invalid_credentials:
+      return 'Invaild username or password.';
+    default:
+      return null;
+  }
+}
 
-export default SignIn;
+const signupStatusEnums = {
+  ok: 0,
+  connection_error: 1,
+  password_mismatch: 2,
+  username_taken: 3,
+  default: 4,
+};
+
+function signupStatusToString(e: signupStatusEnums): string {
+  switch (e) {
+    case signupStatusEnums.ok:
+      return 'Success, redirecting to login page...';
+    case signupStatusEnums.connection_error:
+      return 'Unable to connect to server.';
+    case signupStatusEnums.password_mismatch:
+      return 'Password comfirmation is not matching.';
+    case signupStatusEnums.username_taken:
+      return 'Username has already been taken.';
+    default:
+      return null;
+  }
+}
+
+export default class SignInController extends Component {
+  state = {
+    signinStatus: signinStatusEnums.default,
+    signupStatus: signupStatusEnums.default,
+  };
+
+  async doSubmit(username, password) {
+    try {
+      const res = await axiosClient.post('/authenticate', {
+        username,
+        password,
+      });
+      console.log(res);
+      this.setState({ signinStatus: signinStatusEnums.ok });
+    } catch (error) {
+      console.log(error);
+      this.setState({ signinStatus: signinStatusEnums.connection_error }); // Let SignIn know the account was not successful in logging in
+    }
+  }
+
+  sendSignupRequest = async (user, pass, accountType) => {
+    try {
+      const res = await axiosClient.post('/signup', {
+        user,
+        pass,
+        accountType,
+      });
+      console.log(res); // check if data is a success
+      if (res.succcess) {
+        this.setState({ signupStatus: signupStatusEnums.ok });
+      } else {
+        // username must be taken
+        this.setState({ signupStatus: signupStatusEnums.username_taken });
+      }
+    } catch (e) {
+      this.setState({ signupStatus: signupStatusEnums.connection_error });
+    }
+  };
+
+  doSignup = (username, pass1, pass2, accountType) => {
+    if (pass1.localeCompare(pass2) !== 0) {
+      this.setState({ signupStatus: signupStatusEnums.password_mismatch });
+    } else {
+      this.sendSignupRequest(username, pass1, accountType);
+    }
+  };
+
+  render() {
+    const { signinStatus, signupStatus } = this.state;
+    return (
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={props =>
+            signinStatus === signinStatus.ok ? (
+              <Redirect to="/dashboard" />
+            ) : (
+              <Prompt
+                {...props}
+                handleSubmit={() => this.doSubmit()}
+                status={signinStatusToString(signinStatus)}
+              />
+            )
+          }
+        />
+        <Route
+          path="/signup"
+          render={props =>
+            signupStatus === signupStatusEnums.ok ? (
+              <Redirect to="/" />
+            ) : (
+              <CreateAccount
+                {...props}
+                handleSignup={this.doSignup}
+                status={signupStatusToString(signupStatus)}
+              />
+            )
+          }
+        />
+      </Switch>
+    );
+  }
+}
