@@ -7,6 +7,7 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import ConfirmButton from './ConfirmButton';
 import CheckStatus from '../CheckStatus';
+import routes from '../../routes';
 import logo from '../../images/logo.png';
 
 type Props = {
@@ -34,7 +35,7 @@ const SignIn = ({ handleSubmit }: Props): Node => (
         <PasswordInput />
         <ConfirmButton />
         <CheckStatus />
-        <Link to="/signup" className="signup">
+        <Link to={routes.SIGNUP} className="signup">
           Create Account
         </Link>
       </form>
