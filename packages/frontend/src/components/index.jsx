@@ -12,7 +12,7 @@ const App = (): Node => (
   <HashRouter>
     <div>
       <Route path="/(|signup)" component={SignInController} />
-      <Route path="/dashboard" render={props => <Dashboard {...props} />} />
+      <Route path="/dashboard" component={Dashboard} />
     </div>
   </HashRouter>
 );

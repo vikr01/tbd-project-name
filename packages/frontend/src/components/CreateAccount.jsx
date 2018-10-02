@@ -11,8 +11,13 @@ import {
   Select,
   MenuItem,
 } from '@material-ui/core';
+import type { Node } from 'react';
 
-const DisplayStatus = ({ status }: props) => {
+type DisplayStatusProps = {
+  status: ?string,
+};
+
+export const DisplayStatus = ({ status }: DisplayStatusProps): Node => {
   if (status !== null) {
     return (
       <Typography
@@ -28,14 +33,19 @@ const DisplayStatus = ({ status }: props) => {
   return null;
 };
 
-const SignUpEmailForm = () => (
+const SignUpEmailForm = (): Node => (
   <FormControl margin="normal" required fullWidth>
     <InputLabel htmlFor="email">Email Address</InputLabel>
     <Input id="email" name="email" autoComplete="email" />
   </FormControl>
 );
 
-const SignUpPasswordForm = ({ name, value }: props) => (
+type SignUpPasswordFormProps = {
+  name: string,
+  value: string,
+};
+
+const SignUpPasswordForm = ({ name, value }: SignUpPasswordFormProps): Node => (
   <FormControl margin="normal" required fullWidth>
     <InputLabel htmlFor={name}>{value}</InputLabel>
     <Input
@@ -59,9 +69,9 @@ export default class CreateAccount extends Component<Props> {
     accountType: '', // cannot be null as value of a Select cannot be null
   };
 
-  onSubmit(e, handleSignup) {
+  onSubmit = e => {
+    const { handleSignup } = this.props;
     const { accountType } = this.state;
-    e.preventDefault(); // to prevent the form from refreshing every time.
     const elem = e.target.elements;
     const email = elem.email.value;
     const pass1 = elem.password.value;
@@ -75,10 +85,10 @@ export default class CreateAccount extends Component<Props> {
       return;
     }
     handleSignup(email, pass1, pass2, accountType);
-  }
+  };
 
-  render() {
-    const { handleSignup, status } = this.props;
+  render(): Node {
+    const { status } = this.props;
     const { accountType, hideAccountTypeLabel } = this.state;
     return (
       <Fragment>
@@ -87,12 +97,7 @@ export default class CreateAccount extends Component<Props> {
           <Typography variant="headline" className="textCenter">
             Sign up
           </Typography>
-          <form
-            className="form"
-            onSubmit={e => {
-              this.onSubmit(e, handleSignup);
-            }}
-          >
+          <form className="form" onSubmit={this.onSubmit}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel
                 htmlFor="account_type"
