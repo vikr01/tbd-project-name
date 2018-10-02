@@ -59,7 +59,7 @@ export default class SignInController extends Component {
     signupStatus: signupStatusEnums.default,
   };
 
-  async doSubmit(username, password) {
+  doSubmit = async (username, password) => {
     try {
       const res = await axiosClient.post('/authenticate', {
         username,
@@ -71,7 +71,7 @@ export default class SignInController extends Component {
       console.log(error);
       this.setState({ signinStatus: signinStatusEnums.connection_error }); // Let SignIn know the account was not successful in logging in
     }
-  }
+  };
 
   sendSignupRequest = async (user, pass, accountType) => {
     try {
@@ -113,7 +113,7 @@ export default class SignInController extends Component {
             ) : (
               <Prompt
                 {...props}
-                handleSubmit={() => this.doSubmit()}
+                handleSubmit={this.doSubmit}
                 status={signinStatusToString(signinStatus)}
               />
             )
