@@ -10,7 +10,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import logo from '../../logo.png';
+import logo from '../images/logo.png';
 
 const CheckStatus = ({ status }: props) =>
   status ? (
