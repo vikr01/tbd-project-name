@@ -19,3 +19,5 @@ export class User {
   @Column('varchar')
   password = '';
 }
+
+export default User;

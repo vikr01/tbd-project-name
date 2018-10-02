@@ -11,3 +11,5 @@ export const connectionOptions = {
   logging: false,
   entities: [User],
 };
+
+export default connectionOptions;
