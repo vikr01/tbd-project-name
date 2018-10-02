@@ -5,6 +5,7 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import Prompt from './Prompt';
 import CreateAccount from '../CreateAccount';
+import routes from '../../routes';
 
 const axiosClient: AxiosInstance = axios.create({
   baseURL: 'http://localhost:2000',
@@ -78,7 +79,7 @@ export default class SignInController extends Component {
   sendSignupRequest = async (user, pass, accountType) => {
     let response;
     try {
-      response = await axiosClient.post('/signup', {
+      response = await axiosClient.post('/api/signup', {
         user,
         pass,
         accountType,
@@ -111,10 +112,10 @@ export default class SignInController extends Component {
       <Switch>
         <Route
           exact
-          path="/"
+          path={routes.HOME}
           render={props =>
             signinStatus === signinStatus.ok ? (
-              <Redirect to="/dashboard" />
+              <Redirect to={routes.DASHBOARD} />
             ) : (
               <Prompt
                 {...props}
@@ -125,10 +126,10 @@ export default class SignInController extends Component {
           }
         />
         <Route
-          path="/signup"
+          path={routes.SIGNUP}
           render={props =>
             signupStatus === signupStatusEnums.ok ? (
-              <Redirect to="/" />
+              <Redirect to={routes.HOME} />
             ) : (
               <CreateAccount
                 {...props}
