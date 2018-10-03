@@ -21,33 +21,36 @@ type Props = {
   status: string,
 };
 
-export default class CreateAccount extends Component<Props> {
+type State = {
+  accountType: string,
+  hideAccountTypeLabel: ?boolean,
+};
+
+export default class CreateAccount extends Component<Props, State> {
   props: Props;
 
   state = {
     accountType: '', // cannot be null as value of a Select cannot be null
   };
 
-  onSubmit = e => {
-    e.preventDefault();
+  onSubmit = event => {
+    event.preventDefault();
     const { handleSignup } = this.props;
     const { accountType } = this.state;
-    const elem = e.target.elements;
-    const username = elem.username.value;
-    const firstName = elem.firstName.value;
-    const lastName = elem.lastName.value;
-    const pass1 = elem.password.value;
-    const pass2 = elem.password2.value;
+    const { elements: elem } = event.target;
+    const { value: username } = elem.username;
+    const { value: firstName } = elem.firstName;
+    const { value: lastName } = elem.lastName;
+    const { value: pass1 } = elem.password;
+    const { value: pass2 } = elem.password2;
+
     if (
-      username === undefined ||
-      firstName === undefined ||
-      lastName === undefined ||
-      pass1 === undefined ||
-      pass2 === undefined ||
+      [username, firstName, lastName, pass1, pass2].includes(undefined) ||
       accountType === ''
     ) {
       return;
     }
+
     handleSignup(username, firstName, lastName, pass1, pass2, accountType);
   };
 
@@ -74,10 +77,10 @@ export default class CreateAccount extends Component<Props> {
                 name="account_type"
                 autoFocus
                 value={accountType}
-                onChange={e => {
+                onChange={({ target: { value } }) => {
                   this.setState({
-                    accountType: e.target.value,
-                    hideAccountTypeLabel: e.target.value !== '',
+                    accountType: value,
+                    hideAccountTypeLabel: value !== '',
                   });
                 }}
               >
