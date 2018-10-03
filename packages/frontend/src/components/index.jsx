@@ -22,7 +22,7 @@ const Dashboard = () => (
 const App = (): Node => (
   <HashRouter>
     <Fragment>
-      <Route path={routes.SIGNUP} component={SignIn} />
+      <Route path={`(${routes.HOME}|${routes.SIGNUP})`} component={SignIn} />
       <Route path={routes.DASHBOARD} component={Dashboard} />
       <HomePage />
     </Fragment>
