@@ -2,14 +2,9 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import type { AxiosInstance } from 'axios';
 import Prompt from './Prompt';
 import CreateAccount from '../CreateAccount';
 import routes from '../../routes';
-
-const axiosClient: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:2000',
-});
 
 const signinStatusEnums = {
   ok: 0,
@@ -63,7 +58,7 @@ export default class SignInController extends Component {
   doSubmit = async (username, password) => {
     let response;
     try {
-      response = await axiosClient.post('/authenticate', {
+      response = await axios.post('/authenticate', {
         username,
         password,
       });
@@ -79,7 +74,7 @@ export default class SignInController extends Component {
   sendSignupRequest = async (user, firstName, lastName, pass, accountType) => {
     let response;
     try {
-      response = await axiosClient.post('/api/signup', {
+      response = await axios.post('/api/signup', {
         user,
         firstName,
         lastName,
