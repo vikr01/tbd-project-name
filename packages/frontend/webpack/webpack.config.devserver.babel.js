@@ -3,6 +3,7 @@ import { HotModuleReplacementPlugin } from 'webpack';
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import merge from 'webpack-merge';
 import WriteFilePlugin from 'write-file-webpack-plugin';
+import { port as backendPort } from 'tbd-backend-name/env';
 import webpackDev from './webpack.config.dev.babel';
 import outputDir from '../lib';
 
@@ -33,6 +34,12 @@ export default function(env, argv) {
       inline: false,
       contentBase: outputDir,
       watchContentBase: true,
+      proxy: {
+        '/**/*': {
+          target: `http://localhost:${backendPort}/`,
+          changeOrigin: true,
+        },
+      },
     },
 
     plugins: [
