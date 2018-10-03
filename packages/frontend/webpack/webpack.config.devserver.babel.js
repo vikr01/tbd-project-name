@@ -9,6 +9,10 @@ import outputDir from '../lib';
 
 const port = process.env.PORT || 3000;
 
+if (backendPort === port) {
+  throw new Error('The ports for backend and frontend are the same');
+}
+
 export default function(env, argv) {
   return merge.smartStrategy({
     entry: 'prepend',
