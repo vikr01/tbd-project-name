@@ -6,15 +6,16 @@ import type { Node } from 'react';
 import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import ConfirmButton from './ConfirmButton';
-import CheckStatus from '../CheckStatus';
+import DisplayStatus from '../DisplayStatus';
 import routes from '../../routes';
 import logo from '../../images/logo.png';
 
 type Props = {
   handleSubmit: Function,
+  status: string,
 };
 
-const SignIn = ({ handleSubmit }: Props): Node => (
+const SignIn = ({ handleSubmit, status }: Props): Node => (
   <Fragment>
     <CssBaseline />
     <Paper className="paper">
@@ -34,7 +35,7 @@ const SignIn = ({ handleSubmit }: Props): Node => (
         <EmailInput />
         <PasswordInput />
         <ConfirmButton />
-        <CheckStatus />
+        <DisplayStatus status={status} />
         <Link to={routes.SIGNUP} className="signup">
           Create Account
         </Link>

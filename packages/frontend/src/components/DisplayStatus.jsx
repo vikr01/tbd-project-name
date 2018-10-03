@@ -7,7 +7,7 @@ type Props = {
   status: ?string,
 };
 
-const CheckStatus = ({ status }: Props): Node => {
+const DisplayStatus = ({ status }: Props): Node => {
   if (!status) {
     return null;
   }
@@ -23,4 +23,4 @@ const CheckStatus = ({ status }: Props): Node => {
   );
 };
 
-export default CheckStatus;
+export default DisplayStatus;

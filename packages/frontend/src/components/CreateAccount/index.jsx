@@ -13,7 +13,7 @@ import {
 import type { Node } from 'react';
 import EmailForm from './EmailForm';
 import PasswordForm from './PasswordForm';
-import CheckStatus from '../CheckStatus';
+import DisplayStatus from '../DisplayStatus';
 
 type Props = {
   handleSignup: Function,
@@ -28,6 +28,7 @@ export default class CreateAccount extends Component<Props> {
   };
 
   onSubmit = e => {
+    e.preventDefault();
     const { handleSignup } = this.props;
     const { accountType } = this.state;
     const elem = e.target.elements;
@@ -94,7 +95,7 @@ export default class CreateAccount extends Component<Props> {
             >
               Sign Up
             </Button>
-            <CheckStatus status={status} />
+            <DisplayStatus status={status} />
           </form>
         </Paper>
       </Fragment>
