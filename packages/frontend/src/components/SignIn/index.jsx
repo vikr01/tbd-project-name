@@ -76,11 +76,13 @@ export default class SignInController extends Component {
     this.setState({ signinStatus: signinStatusEnums.ok });
   };
 
-  sendSignupRequest = async (user, pass, accountType) => {
+  sendSignupRequest = async (user, firstName, lastName, pass, accountType) => {
     let response;
     try {
       response = await axiosClient.post('/api/signup', {
         user,
+        firstName,
+        lastName,
         pass,
         accountType,
       });
@@ -98,11 +100,11 @@ export default class SignInController extends Component {
     }
   };
 
-  doSignup = (username, pass1, pass2, accountType) => {
+  doSignup = (username, firstName, lastName, pass1, pass2, accountType) => {
     if (pass1.localeCompare(pass2) !== 0) {
       this.setState({ signupStatus: signupStatusEnums.password_mismatch });
     } else {
-      this.sendSignupRequest(username, pass1, accountType);
+      this.sendSignupRequest(username, firstName, lastName, pass1, accountType);
     }
   };
 

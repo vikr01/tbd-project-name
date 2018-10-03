@@ -3,11 +3,11 @@ import React from 'react';
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 import type { Node } from 'react';
 
-const EmailForm = (): Node => (
+const UsernameForm = (): Node => (
   <FormControl margin="normal" required fullWidth>
-    <InputLabel htmlFor="email">Email Address</InputLabel>
-    <Input id="email" name="email" autoComplete="email" />
+    <InputLabel htmlFor="username">Username</InputLabel>
+    <Input id="username" name="username" autoComplete="username" />
   </FormControl>
 );
 
-export default EmailForm;
+export default UsernameForm;

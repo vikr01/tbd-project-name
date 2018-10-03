@@ -11,9 +11,10 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import type { Node } from 'react';
-import EmailForm from './EmailForm';
+import UsernameForm from './UsernameForm';
 import PasswordForm from './PasswordForm';
 import DisplayStatus from '../DisplayStatus';
+import NameForm from './NameForm';
 
 type Props = {
   handleSignup: Function,
@@ -32,18 +33,22 @@ export default class CreateAccount extends Component<Props> {
     const { handleSignup } = this.props;
     const { accountType } = this.state;
     const elem = e.target.elements;
-    const email = elem.email.value;
+    const username = elem.username.value;
+    const firstName = elem.firstName.value;
+    const lastName = elem.lastName.value;
     const pass1 = elem.password.value;
     const pass2 = elem.password2.value;
     if (
-      email === undefined ||
+      username === undefined ||
+      firstName === undefined ||
+      lastName === undefined ||
       pass1 === undefined ||
       pass2 === undefined ||
       accountType === ''
     ) {
       return;
     }
-    handleSignup(email, pass1, pass2, accountType);
+    handleSignup(username, firstName, lastName, pass1, pass2, accountType);
   };
 
   render(): Node {
@@ -83,7 +88,8 @@ export default class CreateAccount extends Component<Props> {
                 <MenuItem value="Client">Client</MenuItem>
               </Select>
             </FormControl>
-            <EmailForm />
+            <UsernameForm />
+            <NameForm />
             <PasswordForm name="password" value="Password" />
             <PasswordForm name="password2" value="Confirm Password" />
             <Button
