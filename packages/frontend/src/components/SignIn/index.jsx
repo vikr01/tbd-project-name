@@ -58,7 +58,7 @@ export default class SignInController extends Component {
   doSubmit = async (username, password) => {
     let response;
     try {
-      response = await axios.post('/authenticate', {
+      response = await axios.post(backendRoutes.AUTH, {
         username,
         password,
       });
@@ -74,7 +74,7 @@ export default class SignInController extends Component {
   sendSignupRequest = async (user, firstName, lastName, pass, accountType) => {
     let response;
     try {
-      response = await axios.post('/api/signup', {
+      response = await axios.post(backendRoutes.SIGNUP, {
         user,
         firstName,
         lastName,
