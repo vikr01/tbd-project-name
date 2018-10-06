@@ -1,5 +1,7 @@
 # TBD PROJECT NAME
 
+[![Travis Build Status](https://travis-ci.org/vikr01/tbd-project-name.svg?branch=master)](https://travis-ci.org/vikr01/tbd-project-name)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/vikr01/tbd-project-name?svg=true)](https://ci.appveyor.com/project/vikr01/tbd-project-name/branch/master)
 [![Dependency Status](https://david-dm.org/vikr01/tbd-project-name/status.svg)](https://david-dm.org/vikr01/tbd-project-name)
 [![DevDependency Status](https://david-dm.org/vikr01/tbd-project-name/dev-status.svg)](https://david-dm.org/vikr01/tbd-project-name?type=dev)
 [![Master Coverage Status](https://img.shields.io/codecov/c/github/vikr01/tbd-project-name/master.svg)](https://codecov.io/gh/vikr01/tbd-project-name/branch/master)
