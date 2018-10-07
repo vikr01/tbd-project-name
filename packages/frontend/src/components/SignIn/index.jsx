@@ -133,41 +133,39 @@ export default class SignInController extends Component {
 
   render() {
     const { signinStatus, signupStatus } = this.state;
+    console.log(signinStatus);
     return (
-      <div>
-        <Link to={routes.DASHBOARD}> to dashboard </Link>
-        <Switch>
-          <Route
-            exact
-            path={routes.HOME}
-            render={props =>
-              signinStatus === signinStatus.ok ? (
-                <Redirect to={routes.DASHBOARD} />
-              ) : (
-                <Prompt
-                  {...props}
-                  handleSubmit={this.doSubmit}
-                  status={signinStatusToString(signinStatus)}
-                />
-              )
-            }
-          />
-          <Route
-            path={routes.SIGNUP}
-            render={props =>
-              signupStatus === signupStatusEnums.ok ? (
-                <Redirect to={routes.HOME} />
-              ) : (
-                <CreateAccount
-                  {...props}
-                  handleSignup={this.doSignup}
-                  status={signupStatusToString(signupStatus)}
-                />
-              )
-            }
-          />
-        </Switch>
-      </div>
+      <Switch>
+        <Route
+          exact
+          path={routes.HOME}
+          render={props =>
+            signinStatus === signinStatusEnums.ok ? (
+              <Redirect push to={routes.DASHBOARD} />
+            ) : (
+              <Prompt
+                {...props}
+                handleSubmit={this.doSubmit}
+                status={signinStatusToString(signinStatus)}
+              />
+            )
+          }
+        />
+        <Route
+          path={routes.SIGNUP}
+          render={props =>
+            signupStatus === signupStatusEnums.ok ? (
+              <Redirect push to={routes.HOME} />
+            ) : (
+              <CreateAccount
+                {...props}
+                handleSignup={this.doSignup}
+                status={signupStatusToString(signupStatus)}
+              />
+            )
+          }
+        />
+      </Switch>
     );
   }
 }
