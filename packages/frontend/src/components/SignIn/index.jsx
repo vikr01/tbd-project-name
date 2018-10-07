@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import axios from 'axios';
 import HttpStatus from 'http-status-codes';
 import Prompt from './Prompt';
@@ -134,37 +134,40 @@ export default class SignInController extends Component {
   render() {
     const { signinStatus, signupStatus } = this.state;
     return (
-      <Switch>
-        <Route
-          exact
-          path={routes.HOME}
-          render={props =>
-            signinStatus === signinStatus.ok ? (
-              <Redirect to={routes.DASHBOARD} />
-            ) : (
-              <Prompt
-                {...props}
-                handleSubmit={this.doSubmit}
-                status={signinStatusToString(signinStatus)}
-              />
-            )
-          }
-        />
-        <Route
-          path={routes.SIGNUP}
-          render={props =>
-            signupStatus === signupStatusEnums.ok ? (
-              <Redirect to={routes.HOME} />
-            ) : (
-              <CreateAccount
-                {...props}
-                handleSignup={this.doSignup}
-                status={signupStatusToString(signupStatus)}
-              />
-            )
-          }
-        />
-      </Switch>
+      <div>
+        <Link to={routes.DASHBOARD}> to dashboard </Link>
+        <Switch>
+          <Route
+            exact
+            path={routes.HOME}
+            render={props =>
+              signinStatus === signinStatus.ok ? (
+                <Redirect to={routes.DASHBOARD} />
+              ) : (
+                <Prompt
+                  {...props}
+                  handleSubmit={this.doSubmit}
+                  status={signinStatusToString(signinStatus)}
+                />
+              )
+            }
+          />
+          <Route
+            path={routes.SIGNUP}
+            render={props =>
+              signupStatus === signupStatusEnums.ok ? (
+                <Redirect to={routes.HOME} />
+              ) : (
+                <CreateAccount
+                  {...props}
+                  handleSignup={this.doSignup}
+                  status={signupStatusToString(signupStatus)}
+                />
+              )
+            }
+          />
+        </Switch>
+      </div>
     );
   }
 }

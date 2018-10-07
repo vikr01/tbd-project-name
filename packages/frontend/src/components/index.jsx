@@ -15,7 +15,7 @@ const SignIn = () => (
 );
 const Dashboard = () => (
   <CreateLoadable
-    loader={() => import(/* webpackChunkName: "Dashboard" */ './Dashboard')}
+    loader={() => import(/* webpackChunkName: "Dashboard" */ './Dashboard/')}
   />
 );
 
