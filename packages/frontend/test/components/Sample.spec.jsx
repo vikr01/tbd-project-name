@@ -4,7 +4,7 @@ import Sample from '../../src/components/Sample';
 
 describe('Sample component', () => {
   test('should match exact Sample snapshot', () => {
-    const sample = <div>Hello!</div>;
+    const sample = <Sample />;
 
     const tree = renderer.create(sample).toJSON();
 
