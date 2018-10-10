@@ -1,4 +1,5 @@
 // @flow
+
 import 'pretty-error/start';
 import 'dotenv/config';
 import express from 'express';
@@ -167,6 +168,9 @@ process.on('unhandledRejection', err => {
    */
   app.get(routes.USER, async (req, res, next) => {
     const response = await connection.getRepository(User).find({});
+    response.forEach(user => {
+      delete user.password;
+    });
     res.status(HttpStatus.OK).json(response);
   });
 
@@ -183,10 +187,8 @@ process.on('unhandledRejection', err => {
       .findOne({ username: name });
 
     if (user) {
-      const { username, password, firstName, lastName } = user;
-      return res
-        .status(HttpStatus.OK)
-        .json({ username, password, firstName, lastName });
+      const { username, firstName, lastName } = user;
+      return res.status(HttpStatus.OK).json({ username, firstName, lastName });
     }
 
     return res.status(HttpStatus.NOT_FOUND).send('Invalid username');
