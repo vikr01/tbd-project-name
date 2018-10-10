@@ -164,7 +164,6 @@ process.on('unhandledRejection', err => {
 
   /**
    * This route handles displaying all user info
-   * @returns an object with an OK HttpStatus code and all of the user data
    */
   app.get(routes.USER, async (req, res, next) => {
     const response = await connection.getRepository(User).find({});
@@ -173,17 +172,21 @@ process.on('unhandledRejection', err => {
 
   /**
    * This route handles finding user information
-   * @returns an object with a HttpStatus code describing the outcome of the request.
-   *          - NOT_FOUND if username not found in database.
-   *          - OK if user is found in the database.
+   * - NOT_FOUND if username not found in database.
+   * - OK if user is found in the database.
    */
   app.get(routes.SINGLE_USER, async (req, res, next) => {
-    const { username } = req.params;
+    const { username: name } = req.params;
 
-    const user = await connection.getRepository(User).findOne({ username });
+    const user = await connection
+      .getRepository(User)
+      .findOne({ username: name });
 
     if (user) {
-      return res.status(HttpStatus.OK).json(user);
+      const { username, password, firstName, lastName } = user;
+      return res
+        .status(HttpStatus.OK)
+        .json({ username, password, firstName, lastName });
     }
 
     return res.status(HttpStatus.NOT_FOUND).send('Invalid username');
