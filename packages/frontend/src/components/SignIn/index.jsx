@@ -133,7 +133,6 @@ export default class SignInController extends Component {
 
   render() {
     const { signinStatus, signupStatus } = this.state;
-    console.log(signinStatus);
     return (
       <Switch>
         <Route

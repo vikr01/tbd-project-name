@@ -38,38 +38,46 @@ export default class AccountInfoView extends Component<null, State> {
     });
   }
 
-  render() {
-    const { name, username, creditInfo, error, loaded } = this.state;
+  renderContent() {
+    const { error, loaded, name, username, creditInfo } = this.state;
     if (!loaded) {
-      return null;
+      return (
+        <Typography variant="display1" gutterBottom component="h2">
+          Loading...
+        </Typography>
+      );
     }
     if (error) {
       return (
-        <Paper className="paperDashboard">
-          <Typography variant="display1" gutterBottom component="h2">
-            Unable to load user info
-          </Typography>
-        </Paper>
+        <Typography variant="display1" gutterBottom component="h2">
+          Unable to load user info
+        </Typography>
       );
     }
     return (
       <Fragment>
-        <Paper className="paperDashboard">
-          <Typography variant="display1" gutterBottom component="h2">
-            AccountInfoView
+        <Typography variant="display1" gutterBottom component="h2">
+          AccountInfoView
+        </Typography>
+        <div>
+          <Typography variant="headline" className="accountOverviewItem">
+            Name: {name}
           </Typography>
-          <div>
-            <Typography variant="headline" className="accountOverviewItem">
-              Name: {name}
-            </Typography>
-            <Typography variant="headline" className="accountOverviewItem">
-              Username: {username}
-            </Typography>
-            <Typography variant="headline" className="accountOverviewItem">
-              Card number: {creditInfo}
-            </Typography>
-          </div>
-        </Paper>
+          <Typography variant="headline" className="accountOverviewItem">
+            Username: {username}
+          </Typography>
+          <Typography variant="headline" className="accountOverviewItem">
+            Card number: {creditInfo}
+          </Typography>
+        </div>
+      </Fragment>
+    );
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <Paper className="paperDashboard">{this.renderContent()}</Paper>
         <div className="rest" />
       </Fragment>
     );
