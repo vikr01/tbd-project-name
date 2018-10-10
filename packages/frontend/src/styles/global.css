@@ -62,6 +62,14 @@
   padding-top: 88px;
   padding-left: 24px;
 }
+.dashboardComponent2 {
+  flex-grow: 1;
+  padding: 12px;
+  height: '100vh';
+  overflow: 'auto';
+  padding-top: 12px;
+  padding-left: 24px;
+}
 
 .accountOverviewItem {
   padding-left: 24px;
