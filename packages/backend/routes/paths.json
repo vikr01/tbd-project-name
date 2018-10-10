@@ -7,5 +7,5 @@
 
   //users
   "USER": "/users",
-  "SINGLE_USER": "/user/:username"
+  "SINGLE_USER": "/users/:username"
 }
