@@ -162,6 +162,10 @@ process.on('unhandledRejection', err => {
     return res.status(HttpStatus.OK).send('Successfully logged in');
   });
 
+  /**
+   * This route handles displaying all user info
+   * @returns an object with an OK HttpStatus code and all of the user data
+   */
   app.get(routes.USER, async (req, res, next) => {
     const response = await connection.getRepository(User).find({});
     res.status(HttpStatus.OK).json(response);
