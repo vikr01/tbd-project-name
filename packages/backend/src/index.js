@@ -162,7 +162,10 @@ process.on('unhandledRejection', err => {
     return res.status(HttpStatus.OK).send('Successfully logged in');
   });
 
-  app.get(routes.USER, async (req, res, next) => {});
+  app.get(routes.USER, async (req, res, next) => {
+    const response = await connection.getRepository(User).find({});
+    res.status(HttpStatus.OK).json(response);
+  });
 
   /**
    * This route handles finding user information
@@ -176,7 +179,6 @@ process.on('unhandledRejection', err => {
     const user = await connection.getRepository(User).findOne({ username });
 
     if (user) {
-      // User already exists
       return res.status(HttpStatus.OK).json(user);
     }
 
