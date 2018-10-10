@@ -162,6 +162,27 @@ process.on('unhandledRejection', err => {
     return res.status(HttpStatus.OK).send('Successfully logged in');
   });
 
+  app.get(routes.USER, async (req, res, next) => {});
+
+  /**
+   * This route handles finding user information
+   * @returns an object with a HttpStatus code describing the outcome of the request.
+   *          - NOT_FOUND if username not found in database.
+   *          - OK if user is found in the database.
+   */
+  app.get(routes.SINGLE_USER, async (req, res, next) => {
+    const { username } = req.params;
+
+    const user = await connection.getRepository(User).findOne({ username });
+
+    if (user) {
+      // User already exists
+      return res.status(HttpStatus.OK).json(user);
+    }
+
+    return res.status(HttpStatus.NOT_FOUND).send('Invalid username');
+  });
+
   // wait until the app starts
   await promisify(app.listen).bind(app)(port);
   console.log('app started');
