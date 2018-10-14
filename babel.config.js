@@ -5,10 +5,8 @@
   import/no-extraneous-dependencies: 0 
 */
 
-const {
-  workspaces: { packages },
-} = require('./package.json');
+const { workspaces = [] } = require('./package.json');
 
 module.exports = {
-  babelrcRoots: packages,
+  babelrcRoots: workspaces.packages || workspaces,
 };
