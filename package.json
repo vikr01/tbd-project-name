@@ -16,9 +16,10 @@
     "postinstall": "lerna run postinstall",
     "lint": "eslint .",
     "lint-fix": "yarn run lint --fix",
-    "postlint-fix": "prettier --write './**/*.{js,jsx,json,md,css,scss}'",
+    "postlint-fix": "prettier --ignore-path .eslintignore --write './**/*.{js,jsx,json,md,css,scss}'",
     "prepare": "lerna run prepare",
     "start": "yarn workspace tbd-backend-name start",
+    "stop": "yarn workspace tbd-backend-name run stop",
     "test": "cross-env NODE_ENV=test jest"
   },
   "devDependencies": {
