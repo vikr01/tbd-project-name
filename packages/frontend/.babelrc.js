@@ -19,10 +19,11 @@ module.exports = api => {
     presets: [
       [
         require('@babel/preset-env'),
-        Object.assign(
-          { useBuiltIns: 'usage' },
-          isTestEnv ? { targets: { node: 10 } } : {}
-        ),
+        {
+          useBuiltIns: 'usage',
+          ...(isTestEnv ? { targets: { node: 10 } } : {}),
+          debug: api.cache.using(() => process.env.DEBUG === 'true'),
+        },
       ],
       require('@babel/preset-flow'),
       [require('@babel/preset-react'), { development: isDevEnv }],
