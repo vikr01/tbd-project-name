@@ -19,6 +19,9 @@ export class Driver /* extends EntityBase */ {
 
   @Column('int')
   totalReviews = 0;
+
+  @Column('bit')
+  active = 0;
 }
 
 export default Driver;
