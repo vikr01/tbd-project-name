@@ -10,5 +10,6 @@
   "SINGLE_USER": "/users/:username",
 
   //drivers
-  "DRIVER": "/drivers/:username"
+  "DRIVER": "/drivers/:username",
+  "DRIVERS": "/drivers"
 }

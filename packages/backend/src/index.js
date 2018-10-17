@@ -195,12 +195,29 @@ process.on('unhandledRejection', err => {
     return res.status(HttpStatus.NOT_FOUND).send('Invalid username');
   });
 
+  // app.post(routes.DRIVERS, async (req, res, next) => {
+  //   const driverBody = req.body;
+
+  //   const newDriver = Object.assign(new User(), driverBody);
+
+  //   await connection.getRepository(Driver).save(newDriver);
+
+  //   res.status(HttpStatus.OK).send('Done');
+  // });
+
   app.get(routes.DRIVER, async (req, res, next) => {
     const { username: name } = req.params;
 
-    const driver = await connection
-      .getRepository(Driver)
-      .findOne({ username: name });
+    let driver;
+    try {
+      driver = await connection
+        .getRepository(Driver)
+        .findOne({ username: name });
+    } catch (error) {
+      return res
+        .status(HttpStatus.IM_A_TEAPOT)
+        .send('Error accessing database');
+    }
 
     if (driver) {
       return res.status(HttpStatus.OK).json(driver);
@@ -211,10 +228,15 @@ process.on('unhandledRejection', err => {
 
   app.put(routes.DRIVER, async (req, res, next) => {
     const { username: name } = req.params;
+    let repo;
+    let driver;
 
-    const repo = await connection.getRepository(Driver);
-
-    const driver = await repo.findOne({ username: name });
+    try {
+      repo = await connection.getRepository(Driver);
+      driver = await repo.findOne({ username: name });
+    } catch (error) {
+      res.status(HttpStatus.IM_A_TEAPOT).send('Error accessing database');
+    }
 
     if (!driver) {
       return res
