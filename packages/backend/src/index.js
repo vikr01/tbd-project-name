@@ -248,9 +248,9 @@ process.on('unhandledRejection', err => {
       if (driver.hasOwnProperty(key)) {
         driver[key] = value;
       } else {
-        return res
-          .status(HttpStatus.BAD_REQUEST)
-          .send(`Did not expect key:${key}`);
+        chalk.blue(
+          `Discarding non-existent key, ${key}, for username: ${name}`
+        );
       }
     });
 
