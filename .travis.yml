@@ -8,6 +8,6 @@ cache: yarn
 install: yarn install --ignore-scripts
 
 script:
-  - yarn run lint
-  - yarn run build
-  - yarn run test
+  - yarn lint
+  - yarn build
+  - yarn test
