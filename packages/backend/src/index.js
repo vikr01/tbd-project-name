@@ -248,8 +248,10 @@ process.on('unhandledRejection', err => {
       if (driver.hasOwnProperty(key)) {
         driver[key] = value;
       } else {
-        chalk.blue(
-          `Discarding non-existent key, ${key}, for username: ${name}`
+        console.warn(
+          chalk.blue(
+            `Discarding non-existent key, ${key}, for username: ${name}`
+          )
         );
       }
     });
