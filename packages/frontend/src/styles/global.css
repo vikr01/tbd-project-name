@@ -74,3 +74,12 @@
 .accountOverviewItem {
   padding-left: 24px;
 }
+
+.requestFormToggleLocation {
+  height: 156;
+  padding: 4px 8px;
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'flex-start';
+  margin: 4px 0px;
+}
