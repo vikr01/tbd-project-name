@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 
 const COST_PER_MILE = 2;
@@ -7,7 +7,11 @@ const METERS_TO_MILES = 1609.344;
 const START_COST = 15;
 const FIRST_N_MILES_FREE = 2;
 
-const CostEstimater = ({ meters }: props) => (
+type Props = {
+  meters: Number,
+};
+
+const CostEstimater = ({ meters }: Props) => (
   <Typography variant="h5">
     Cost:
     {' $'}

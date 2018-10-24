@@ -200,12 +200,17 @@ class Dashboard extends Component<Props> {
   }
 }
 
-const ShowMainContent = ({ page, classes }: props) => {
+type MainContentProps = {
+  page: string,
+  classes: object,
+};
+
+const ShowMainContent = ({ page, classes }: MainContentProps) => {
   if (page === 'Rides') {
     return <RidesView classes={classes} />;
   }
   if (page === 'Account') {
-    return <AccountInfoView classes={classes} />;
+    return <AccountInfoView />;
   }
   if (page === 'Dashboard') {
     return <OverviewView classes={classes} />;

@@ -33,7 +33,12 @@ function LiveGMapView({
   return null;
 }
 
-function RequestButton({ showMap, startRequest }: props) {
+type RequestButtonProps = {
+  showMap: boolean,
+  startRequest: func,
+};
+
+function RequestButton({ showMap, startRequest }: RequestButtonProps) {
   if (showMap) {
     return null;
   }

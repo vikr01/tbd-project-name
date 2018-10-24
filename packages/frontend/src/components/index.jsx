@@ -18,6 +18,13 @@ const Dashboard = () => (
     loader={() => import(/* webpackChunkName: "Dashboard" */ './Dashboard/')}
   />
 );
+const CreditCardAdd = () => (
+  <CreateLoadable
+    loader={() =>
+      import(/* webpackChunkName: "CreditCardAdd" */ './Dashboard/AccountInfo/CreditCardAdd/')
+    }
+  />
+);
 
 const App = (): Node => (
   <HashRouter>
@@ -25,6 +32,7 @@ const App = (): Node => (
       <Header />
       <Route path={`(${routes.HOME}|${routes.SIGNUP})`} component={SignIn} />
       <Route path={routes.DASHBOARD} component={Dashboard} />
+      <Route path={routes.CREDITCARD_ADD} component={CreditCardAdd} />
     </Fragment>
   </HashRouter>
 );

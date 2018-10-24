@@ -2,27 +2,28 @@
 import React, { Fragment, Component } from 'react';
 import axios from 'axios';
 import { Typography, Paper } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import routes from '../../../routes';
 
-type State = {
-  name: string,
-  username: string,
-  creditInfo: string,
-  error: boolean,
-  loaded: boolean,
-};
+export default class AccountInfoView extends Component {
+  state = {
+    name: '',
+    username: '',
+    creditInfo: '',
+    error: false,
+    loaded: false,
+  };
 
-export default class AccountInfoView extends Component<null, State> {
-  state: State;
-
-  componentWillMount() {
-    this.setState({ loaded: false });
-    this.populateState();
+  async componentDidMount() {
+    await this.populateState();
   }
 
   async populateState() {
     let response;
     try {
-      response = await axios.get(backendRoutes.ACCOUNT_INFO);
+      response = await axios.get(
+        backendRoutes.SINGLE_USER.replace(':username', 'toep')
+      );
     } catch (error) {
       console.error(error);
       this.setState({ error: true, loaded: true });
@@ -30,9 +31,9 @@ export default class AccountInfoView extends Component<null, State> {
     }
     console.log(response);
     this.setState({
-      name: response.data.name,
+      name: `${response.data.firstName} ${response.data.lastName}`,
       username: response.data.username,
-      creditInfo: response.data.creditInfo,
+      creditInfo: '4400123412341234',
       error: false,
       loaded: true,
     });
@@ -69,6 +70,9 @@ export default class AccountInfoView extends Component<null, State> {
           <Typography variant="h5" className="accountOverviewItem">
             Card number: {creditInfo}
           </Typography>
+          <Link to={routes.CREDITCARD_ADD} className="accountOverviewItem">
+            Enter Credit card info
+          </Link>
         </div>
       </Fragment>
     );

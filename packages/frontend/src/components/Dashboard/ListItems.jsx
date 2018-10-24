@@ -7,7 +7,11 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-const ListItems = ({ onClick }: props) => (
+type Props = {
+  onClick: func,
+};
+
+const ListItems = ({ onClick }: Props) => (
   <div>
     <ListItem button onClick={() => onClick('Dashboard')}>
       <ListItemIcon>
