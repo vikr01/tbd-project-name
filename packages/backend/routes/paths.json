@@ -7,7 +7,5 @@
 
   // users
   "USER": "/users",
-  "SINGLE_USER": "/users/:username",
-  // user info
-  "ACCOUNT_INFO": "/api/accountInfo"
+  "SINGLE_USER": "/users/:username"
 }
