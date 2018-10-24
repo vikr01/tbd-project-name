@@ -42,31 +42,31 @@ export default class AccountInfoView extends Component<null, State> {
     const { error, loaded, name, username, creditInfo } = this.state;
     if (!loaded) {
       return (
-        <Typography variant="display1" gutterBottom component="h2">
+        <Typography variant="h4" gutterBottom component="h2">
           Loading...
         </Typography>
       );
     }
     if (error) {
       return (
-        <Typography variant="display1" gutterBottom component="h2">
+        <Typography variant="h4" gutterBottom component="h2">
           Unable to load user info
         </Typography>
       );
     }
     return (
       <Fragment>
-        <Typography variant="display1" gutterBottom component="h2">
+        <Typography variant="h4" gutterBottom component="h2">
           AccountInfoView
         </Typography>
         <div>
-          <Typography variant="headline" className="accountOverviewItem">
+          <Typography variant="h5" className="accountOverviewItem">
             Name: {name}
           </Typography>
-          <Typography variant="headline" className="accountOverviewItem">
+          <Typography variant="h5" className="accountOverviewItem">
             Username: {username}
           </Typography>
-          <Typography variant="headline" className="accountOverviewItem">
+          <Typography variant="h5" className="accountOverviewItem">
             Card number: {creditInfo}
           </Typography>
         </div>
