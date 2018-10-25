@@ -7,28 +7,24 @@ import ValueForm from '../ValueForm';
 import DisplayStatus from '../../../DisplayStatus';
 import routes from '../../../../routes';
 
-function cardOk(card: string) {
-  const len = card.length;
-  if (card.startsWith('3'))
-    // American Express
-    return len === 15;
-  if (card.startsWith('4') || card.startsWith('5') || card.startsWith('6'))
-    // Visa, Mastercard, Discover
-    return len === 16;
-  return false;
+function countOk(count: int) {
+  return count > 0 && count <= 10;
 }
 
-export default class CreditCardAdd extends Component<Props> {
+export default class CarSeatSet extends Component<Props> {
   state = {
     redirect: false,
     status: '',
   };
 
-  sendToBackend = async card => {
-    console.log('sending card to backend', card);
+  sendToBackend = async count => {
+    console.log('sending count to backend', count);
     try {
-      await axios.post(backendRoutes.ADDCREDITCARD, card);
-      this.setState({ redirect: true, status: 'we got your card saved!' });
+      await axios.post(backendRoutes.SETSEATCOUNT, count);
+      this.setState({
+        redirect: true,
+        status: 'we got your seat count saved!',
+      });
     } catch (e) {
       this.setState({ status: 'Issue connecting to server' });
     }
@@ -37,14 +33,14 @@ export default class CreditCardAdd extends Component<Props> {
   onSubmit = event => {
     event.preventDefault();
     const { elements: elem } = event.target;
-    const { value: card } = elem.card;
+    const { value: count } = elem.count;
 
-    if (!cardOk(card)) {
-      this.setState({ status: 'Invalid card number' });
+    if (!countOk(count)) {
+      this.setState({ status: 'Invalid count. Must be between 1 and 10' });
       return;
     }
 
-    this.sendToBackend(card);
+    this.sendToBackend(count);
   };
 
   render() {
@@ -58,10 +54,10 @@ export default class CreditCardAdd extends Component<Props> {
         <CssBaseline />
         <Paper className="paper">
           <Typography variant="headline" className="textCenter">
-            Add Credit card
+            Set number of seats in your car
           </Typography>
           <form className="form" onSubmit={this.onSubmit}>
-            <ValueForm name="card" value="Credit card number" />
+            <ValueForm name="count" value="Number of available seats" />
             <Button
               type="submit"
               fullWidth
@@ -69,7 +65,7 @@ export default class CreditCardAdd extends Component<Props> {
               color="primary"
               className="submit"
             >
-              Add
+              Set
             </Button>
             <DisplayStatus status={status} />
           </form>
