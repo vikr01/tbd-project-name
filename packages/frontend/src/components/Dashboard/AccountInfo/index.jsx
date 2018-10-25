@@ -34,13 +34,23 @@ export default class AccountInfoView extends Component {
       name: `${response.data.firstName} ${response.data.lastName}`,
       username: response.data.username,
       creditInfo: '4400123412341234',
+      accountType: 'Driver',
+      moneyEarned: 0,
       error: false,
       loaded: true,
     });
   }
 
   renderContent() {
-    const { error, loaded, name, username, creditInfo } = this.state;
+    const {
+      error,
+      loaded,
+      name,
+      username,
+      creditInfo,
+      accountType,
+      moneyEarned,
+    } = this.state;
     if (!loaded) {
       return (
         <Typography variant="h4" gutterBottom component="h2">
@@ -67,12 +77,26 @@ export default class AccountInfoView extends Component {
           <Typography variant="h5" className="accountOverviewItem">
             Username: {username}
           </Typography>
-          <Typography variant="h5" className="accountOverviewItem">
-            Card number: {creditInfo}
-          </Typography>
-          <Link to={routes.CREDITCARD_ADD} className="accountOverviewItem">
-            Enter Credit card info
-          </Link>
+          {accountType === 'User' && (
+            <Fragment>
+              <Typography variant="h5" className="accountOverviewItem">
+                Card number: {creditInfo}
+              </Typography>
+              <Link to={routes.CREDITCARD_ADD} className="accountOverviewItem">
+                Enter Credit card info
+              </Link>
+            </Fragment>
+          )}
+          {accountType === 'Driver' && (
+            <Fragment>
+              <Typography variant="h5" className="accountOverviewItem">
+                Money earned: {moneyEarned}
+              </Typography>
+              <Link to={routes.CARSEATS_SET} className="accountOverviewItem">
+                Change seat count
+              </Link>
+            </Fragment>
+          )}
         </div>
       </Fragment>
     );
