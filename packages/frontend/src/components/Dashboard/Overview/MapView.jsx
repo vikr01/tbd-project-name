@@ -6,10 +6,12 @@ import { Typography, Button } from '@material-ui/core';
 import { geolocated, geoPropTypes } from 'react-geolocated';
 import RequestForm from './RequestForm';
 import GMapsControl from './GMapsControl';
+import CostEstimater from './CostEstimater';
 
 function LiveGMapView({
   showMap,
-  doRequest,
+  doRequestToAirport,
+  doRequestFromAirport,
   data,
   route,
   routeSet,
@@ -20,10 +22,21 @@ function LiveGMapView({
     return (
       <Fragment>
         <RequestForm
-          sendRequest={doRequest}
-          duration={duration}
-          distance={distance}
+          sendRequestToAirport={doRequestToAirport}
+          sendRequestFromAirport={doRequestFromAirport}
         />
+        {duration &&
+          distance && (
+            <Fragment>
+              <Typography variant="h4">
+                Estimated duration: {duration.text}
+              </Typography>
+              <CostEstimater meters={distance.value} />
+              <Button variant="contained">Make request</Button>
+              <br />
+            </Fragment>
+          )}
+
         <div style={{ height: '100vh', width: '100%' }}>
           <GMapsControl data={data} route={route} routeSet={routeSet} />
         </div>
@@ -49,6 +62,19 @@ function RequestButton({ showMap, startRequest }: RequestButtonProps) {
   );
 }
 
+function airportToCoords(airport) {
+  if (airport === 'SFO') {
+    return { lat: 37.6213129, lng: -122.3811441 };
+  }
+  if (airport === 'OAK') {
+    return { lat: 37.7125689, lng: -122.2219315 };
+  }
+  if (airport === 'SJC') {
+    return { lat: 37.3639472, lng: -121.9311262 };
+  }
+  return null;
+}
+
 type Props = {
   showMap: boolean,
   startRequest: func,
@@ -71,9 +97,9 @@ class MapView extends React.Component<Props> {
     }
   };
 
-  doRequest = value => {
+  doRequestToAirport = airport => {
     const { coords, isGeolocationEnabled, isGeolocationAvailable } = this.props;
-    console.log('we are doing stuf', value);
+    console.log('we are doing stuf', airport);
     console.log(coords);
     console.log('isGeolocationEnabled', isGeolocationEnabled);
     if (!isGeolocationEnabled) {
@@ -82,17 +108,16 @@ class MapView extends React.Component<Props> {
       );
     }
     console.log('isGeolocationAvailable', isGeolocationAvailable);
-    let toCoords = {};
-    const fromCoords = { lat: coords.latitude, long: coords.longitude };
-    if (value === 'SFO') {
-      toCoords = { lat: 37.6213129, long: -122.3811441 };
-    } else if (value === 'OAK') {
-      toCoords = { lat: 37.7125689, long: -122.2219315 };
-    } else if (value === 'SJC') {
-      toCoords = { lat: 37.3639472, long: -121.9311262 };
-    }
-
+    const fromCoords = { lat: coords.latitude, lng: coords.longitude };
+    const toCoords = airportToCoords(airport);
     this.setState({ data: { to: toCoords, from: fromCoords }, route: true });
+  };
+
+  doRequestFromAirport = (airport, lat, lng) => {
+    const fromCoords = airportToCoords(airport);
+    const toCoords = { lat, lng };
+    this.setState({ data: { to: toCoords, from: fromCoords }, route: true });
+    console.log('from ', airport, ' to ', lat, lng);
   };
 
   routeSet = (duration, distance) => {
@@ -111,7 +136,8 @@ class MapView extends React.Component<Props> {
         <RequestButton showMap={showMap} startRequest={startRequest} />
         <LiveGMapView
           showMap={showMap}
-          doRequest={this.doRequest}
+          doRequestToAirport={this.doRequestToAirport}
+          doRequestFromAirport={this.doRequestFromAirport}
           data={data}
           route={route}
           routeSet={(_duration, _distance) =>
