@@ -2,6 +2,7 @@
 // @flow
 import React from 'react';
 import { compose, withProps, lifecycle } from 'recompose';
+
 import {
   GoogleMap,
   withGoogleMap,
@@ -29,8 +30,8 @@ const GMapsControl = compose(
           const DirectionsService = new google.maps.DirectionsService();
           DirectionsService.route(
             {
-              origin: new google.maps.LatLng(data.from.lat, data.from.long),
-              destination: new google.maps.LatLng(data.to.lat, data.to.long),
+              origin: new google.maps.LatLng(data.from.lat, data.from.lng),
+              destination: new google.maps.LatLng(data.to.lat, data.to.lng),
               travelMode: google.maps.TravelMode.DRIVING,
             },
             async (result, status) => {
