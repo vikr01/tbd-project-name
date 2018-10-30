@@ -3,7 +3,6 @@ import React from 'react';
 import { compose, withProps, lifecycle } from 'recompose';
 import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
-import { Button } from '@material-ui/core';
 
 const MyStandaloneSearchbox = compose(
   withProps({
@@ -54,7 +53,7 @@ const MyStandaloneSearchbox = compose(
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
-          width: `240px`,
+          width: `340px`,
           height: `32px`,
           padding: `0 12px`,
           borderRadius: `3px`,
