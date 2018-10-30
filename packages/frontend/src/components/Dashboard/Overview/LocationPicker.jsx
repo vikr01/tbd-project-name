@@ -1,7 +1,13 @@
 // @flow
 import React, { Component, Fragment } from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { RadioGroup, Radio, Button, Typography } from '@material-ui/core';
+import {
+  RadioGroup,
+  Radio,
+  Button,
+  FormLabel,
+  Typography,
+} from '@material-ui/core';
 import MyStandaloneSearchBox from './MyStandaloneSearchBox';
 
 type Props = {
