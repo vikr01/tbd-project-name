@@ -274,12 +274,9 @@ process.on('unhandledRejection', err => {
   }
 
   app.get(routes.CLOSEST_DRIVER, async (req, res, next) => {
-    const { userLat, userLong, destination } = req.query;
+    const { lat, long, destination } = req.query;
 
-    if (
-      !correctLat(parseFloat(userLat)) ||
-      !correctLong(parseFloat(userLong))
-    ) {
+    if (!correctLat(parseFloat(lat)) || !correctLong(parseFloat(long))) {
       return res.status(HttpStatus.BAD_REQUEST).send('Invalid arguments');
     }
 
@@ -294,7 +291,7 @@ process.on('unhandledRejection', err => {
           params: {
             units: 'imperial',
             origins: `${driver.currentLatitude},${driver.currentLongitude}`,
-            destinations: `${userLat},${userLong}`,
+            destinations: `${lat},${long}`,
             key: process.env.API_KEY,
           },
         }
@@ -304,12 +301,14 @@ process.on('unhandledRejection', err => {
         leastTime = duration;
         closestDriver = driver;
       }
-      console.log(`${driver.username} ${duration}`);
     });
 
     if (Object.keys(closestDriver).keys().length === 0) {
       return res.status(HttpStatus.NOT_FOUND).send('Could not find a driver');
     }
+
+    // add name of driver in response only if already authenticated
+    closestDriver.name = req.session.user;
 
     return res.status(HttpStatus.OK).json(closestDriver);
   });
@@ -319,5 +318,5 @@ process.on('unhandledRejection', err => {
 
   // wait until the app starts
   await promisify(app.listen).bind(app)(port);
-  console.log('app started');
+  console.log(`App started on port ${port}`);
 })();

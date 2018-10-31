@@ -6,16 +6,6 @@ import { CreditCard } from './CreditCard';
 
 @Entity()
 export class User /* extends EntityBase */ {
-  // id: ?number;
-
-  // firstName: string;
-
-  // lastName: string;
-
-  // userName: string;
-
-  // password: string;
-
   @PrimaryGeneratedColumn()
   id = undefined;
 
