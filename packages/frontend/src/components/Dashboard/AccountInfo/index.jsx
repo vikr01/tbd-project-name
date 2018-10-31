@@ -21,9 +21,7 @@ export default class AccountInfoView extends Component {
   async populateState() {
     let response;
     try {
-      response = await axios.get(
-        backendRoutes.SINGLE_USER.replace(':username', 'toep')
-      );
+      response = await axios.get(backendRoutes.SINGLE_USER);
     } catch (error) {
       console.error(error);
       this.setState({ error: true, loaded: true });
@@ -33,9 +31,9 @@ export default class AccountInfoView extends Component {
     this.setState({
       name: `${response.data.firstName} ${response.data.lastName}`,
       username: response.data.username,
-      creditInfo: '4400123412341234',
-      accountType: 'Driver',
-      moneyEarned: 0,
+      creditInfo: response.data.creditInfo,
+      accountType: response.data.accountType,
+      moneyEarned: response.data.moneyEarned,
       error: false,
       loaded: true,
     });
