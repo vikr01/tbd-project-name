@@ -116,7 +116,7 @@ process.on('unhandledRejection', err => {
       username,
       firstName,
       lastName,
-      // accountType
+      accountType,
     });
 
     try {

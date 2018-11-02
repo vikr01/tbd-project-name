@@ -29,7 +29,7 @@ export class User /* extends EntityBase */ {
   password = '';
 
   @Column('varchar')
-  userType = '';
+  accountType = '';
 
   @OneToOne(type => CreditCard)
   @JoinColumn()
