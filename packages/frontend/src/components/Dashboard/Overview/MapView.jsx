@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { Typography, Button } from '@material-ui/core';
 
 import { geolocated, geoPropTypes } from 'react-geolocated';
+import axios from 'axios';
 import RequestForm from './RequestForm';
 import GMapsControl from './GMapsControl';
 import CostEstimater from './CostEstimater';
@@ -17,6 +18,9 @@ function LiveGMapView({
   routeSet,
   duration,
   distance,
+  requestRide,
+  assignedDriver,
+  driverArriving,
 }: props) {
   if (showMap) {
     return (
@@ -32,13 +36,21 @@ function LiveGMapView({
                 Estimated duration: {duration.text}
               </Typography>
               <CostEstimater meters={distance.value} />
-              <Button variant="contained">Make request</Button>
+              <Button variant="contained" onClick={requestRide}>
+                Make request
+              </Button>
               <br />
             </Fragment>
           )}
 
         <div style={{ height: '100vh', width: '100%' }}>
-          <GMapsControl data={data} route={route} routeSet={routeSet} />
+          <GMapsControl
+            data={data}
+            route={route}
+            routeSet={routeSet}
+            assignedDriver={assignedDriver}
+            driverArriving={driverArriving}
+          />
         </div>
       </Fragment>
     );
@@ -85,17 +97,20 @@ class MapView extends React.Component<Props> {
       to: { lat: Number, long: Number },
       from: { lat: Number, long: Number },
       route: false,
+      assignedDriver: null,
+      driverArriving: false,
     },
     duration: null,
     distance: null,
   };
 
-  componentWillReceiveProps = nextProps => {
-    const { coords } = this.props;
+  static getDerivedStateFromProps(nextProps) {
+    const { coords } = nextProps;
     if (coords !== nextProps.coords) {
-      console.log('we have the persons location');
+      console.log('User location aquired');
     }
-  };
+    return null;
+  }
 
   doRequestToAirport = airport => {
     const { coords, isGeolocationEnabled, isGeolocationAvailable } = this.props;
@@ -121,13 +136,36 @@ class MapView extends React.Component<Props> {
   };
 
   routeSet = (duration, distance) => {
-    console.log('set route prop to false', duration);
     this.setState({ route: false, duration, distance });
+  };
+
+  requestRide = async () => {
+    const { data } = this.state;
+    console.log('requesting ride now');
+    console.log(data);
+    let response;
+    try {
+      response = await axios.get(
+        `${backendRoutes.CLOSEST_DRIVER}?lat=${data.from.lat}&long=${
+          data.from.lng
+        }`
+      );
+    } catch (error) {
+      console.error(error);
+    }
+    this.setState({ assignedDriver: response.data, driverArriving: true });
   };
 
   render() {
     const { showMap, startRequest } = this.props;
-    const { data, route, duration, distance } = this.state;
+    const {
+      data,
+      route,
+      duration,
+      distance,
+      driverArriving,
+      assignedDriver,
+    } = this.state;
     return (
       <Fragment>
         <Typography variant="h4" className="dashboardComponent2">
@@ -145,6 +183,9 @@ class MapView extends React.Component<Props> {
           }
           duration={duration}
           distance={distance}
+          requestRide={() => this.requestRide()}
+          driverArriving={driverArriving}
+          assignedDriver={assignedDriver}
         />
       </Fragment>
     );

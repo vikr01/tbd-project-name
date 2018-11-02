@@ -21,7 +21,7 @@ export default class AccountInfoView extends Component {
   async populateState() {
     let response;
     try {
-      response = await axios.get(backendRoutes.SINGLE_USER);
+      response = await axios.get(backendRoutes.USER);
     } catch (error) {
       console.error(error);
       this.setState({ error: true, loaded: true });
@@ -33,7 +33,6 @@ export default class AccountInfoView extends Component {
       username: response.data.username,
       creditInfo: response.data.creditInfo,
       accountType: response.data.accountType,
-      moneyEarned: response.data.moneyEarned,
       error: false,
       loaded: true,
     });
@@ -47,7 +46,6 @@ export default class AccountInfoView extends Component {
       username,
       creditInfo,
       accountType,
-      moneyEarned,
     } = this.state;
     if (!loaded) {
       return (
@@ -87,9 +85,6 @@ export default class AccountInfoView extends Component {
           )}
           {accountType === 'Driver' && (
             <Fragment>
-              <Typography variant="h5" className="accountOverviewItem">
-                Money earned: {moneyEarned}
-              </Typography>
               <Link to={routes.CARSEATS_SET} className="accountOverviewItem">
                 Change seat count
               </Link>
