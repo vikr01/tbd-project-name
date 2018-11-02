@@ -4,6 +4,7 @@
   // authenticate
   "AUTH": "/api/authenticate",
   "SIGNUP": "/api/signup",
+  "LOGGED_IN": "/api/loggedIn",
 
   // users
   "USER": "/api/users",

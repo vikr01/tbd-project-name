@@ -168,6 +168,16 @@ process.on('unhandledRejection', err => {
   });
 
   /**
+   * Check if user is logged in
+   */
+  app.get(routes.LOGGED_IN, async (req, res, next) => {
+    if (req.session.user) {
+      return res.status(HttpStatus.OK).send('User is logged in');
+    }
+    return res.status(HttpStatus.NOT_FOUND).send('User is not logged in');
+  });
+
+  /**
    * This route handles displaying all user info
    */
   app.get(routes.USER, async (req, res, next) => {
