@@ -6,13 +6,15 @@
   "SIGNUP": "/api/signup",
 
   // users
-  "USER": "/users",
-  "SINGLE_USER": "/users/:username",
+  "USER": "/api/users",
 
   //drivers
   "DRIVER": "/drivers/:username",
   "DRIVERS": "/drivers",
 
   //location api
-  "CLOSEST_DRIVER": "/api/nearestDriver"
+  "CLOSEST_DRIVER": "/api/nearestDriver",
+
+  //credit card api
+  "ADD_CREDIT_CARD": "/api/creditCard"
 }

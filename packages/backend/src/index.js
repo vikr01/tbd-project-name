@@ -19,6 +19,8 @@ import { connectionOptions } from './db_connection';
 import routes from '../routes';
 import { User } from './entity/User';
 import { Driver } from './entity/Driver';
+import { CreditCard } from './entity/CreditCard';
+import { Passenger } from './entity/Passenger';
 
 const port: number = process.env.PORT || 2000;
 
@@ -158,6 +160,7 @@ process.on('unhandledRejection', err => {
     // create a session for user on auth
     req.session.regenerate(() => {
       req.session.user = `${user.firstName} ${user.lastName}`;
+      req.session.username = user.username;
     });
 
     console.log(`Welcome back, ${user.firstName}`);
@@ -168,20 +171,7 @@ process.on('unhandledRejection', err => {
    * This route handles displaying all user info
    */
   app.get(routes.USER, async (req, res, next) => {
-    const response = await connection.getRepository(User).find({});
-    response.forEach(user => {
-      delete user.password;
-    });
-    res.status(HttpStatus.OK).json(response);
-  });
-
-  /**
-   * This route handles finding user information
-   * - NOT_FOUND if username not found in database.
-   * - OK if user is found in the database.
-   */
-  app.get(routes.SINGLE_USER, async (req, res, next) => {
-    const { username: name } = req.params;
+    const name = req.session.username;
 
     const user = await connection
       .getRepository(User)
@@ -311,6 +301,48 @@ process.on('unhandledRejection', err => {
     closestDriver.name = req.session.user;
 
     return res.status(HttpStatus.OK).json(closestDriver);
+  });
+
+  app.post(routes.ADD_CREDIT_CARD, async (req, res, next) => {
+    const { creditCard } = req.body;
+    const { username } = req.session;
+
+    if (!creditCard) {
+      return res
+        .statusCode(HttpStatus.BAD_REQUEST)
+        .send('Expected creditCard param');
+    }
+
+    let user;
+    try {
+      user = await connection.getRepository(User).findOne({ username });
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
+
+    if (!user) {
+      res.statusCode(HttpStatus.NOT_FOUND).send('Could not find user');
+    }
+
+    const newCard = Object.assign(new CreditCard(), {
+      cardNum: creditCard,
+    });
+
+    try {
+      await connection.getRepository(CreditCard).save(newCard);
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
+
+    user.creditCard = newCard;
+
+    try {
+      await connection.getRepository(User).save(user);
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
+
+    return res.status(HttpStatus.OK).send();
   });
 
   // this sets the public directory to the frontend package's build directory
