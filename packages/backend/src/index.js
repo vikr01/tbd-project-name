@@ -248,8 +248,8 @@ process.on('unhandledRejection', err => {
     return res.status(HttpStatus.NOT_FOUND).send('Invalid username');
   });
 
-  app.put(routes.DRIVER, async (req, res, next) => {
-    const { username: name } = req.params;
+  app.put(routes.DRIVERS, async (req, res, next) => {
+    const { username: name } = req.session;
     let repo;
     let driver;
 
