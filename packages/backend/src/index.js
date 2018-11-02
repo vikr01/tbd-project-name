@@ -335,11 +335,11 @@ process.on('unhandledRejection', err => {
     return res.status(HttpStatus.OK).json(closestDriver);
   });
 
-  app.post(routes.ADD_CREDIT_CARD, async (req, res, next) => {
-    const { creditCard } = req.body;
+  app.post(routes.ADDCREDITCARD, async (req, res, next) => {
+    const { card } = req.body;
     const { username } = req.session;
 
-    if (!creditCard) {
+    if (!card) {
       return res
         .statusCode(HttpStatus.BAD_REQUEST)
         .send('Expected creditCard param');
@@ -357,7 +357,7 @@ process.on('unhandledRejection', err => {
     }
 
     const newCard = Object.assign(new CreditCard(), {
-      cardNum: creditCard,
+      cardNum: card,
     });
 
     try {

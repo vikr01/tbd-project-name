@@ -17,5 +17,5 @@
   "CLOSEST_DRIVER": "/api/nearestDriver",
 
   //credit card api
-  "ADD_CREDIT_CARD": "/api/creditCard"
+  "ADDCREDITCARD": "/api/creditCard"
 }
