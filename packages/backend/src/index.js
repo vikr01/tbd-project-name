@@ -173,13 +173,35 @@ process.on('unhandledRejection', err => {
   app.get(routes.USER, async (req, res, next) => {
     const name = req.session.username;
 
-    const user = await connection
-      .getRepository(User)
-      .findOne({ username: name });
+    let user;
+    try {
+      user = await connection.getRepository(User).findOne({
+        select: [
+          'firstName',
+          'lastName',
+          'username',
+          'accountType',
+          'creditCard',
+        ],
+        relations: ['creditCard'],
+        where: {
+          username: name,
+        },
+      });
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
 
     if (user) {
-      const { username, firstName, lastName } = user;
-      return res.status(HttpStatus.OK).json({ username, firstName, lastName });
+      const { username, firstName, lastName, accountType, creditCard } = user;
+      const cardNum = creditCard ? creditCard.cardNum : '';
+      return res.status(HttpStatus.OK).json({
+        username,
+        firstName,
+        lastName,
+        accountType,
+        creditCard: cardNum,
+      });
     }
 
     return res.status(HttpStatus.NOT_FOUND).send('Invalid username');
