@@ -158,9 +158,10 @@ process.on('unhandledRejection', err => {
     }
 
     // create a session for user on auth
-    req.session.regenerate(() => {
-      req.session.user = `${user.firstName} ${user.lastName}`;
-      req.session.username = user.username;
+    req.session.regenerate(err => {});
+    req.session.username = user.username;
+    req.session.save(err => {
+      console.log('saved session, ', err);
     });
 
     console.log(`Welcome back, ${user.firstName}`);
