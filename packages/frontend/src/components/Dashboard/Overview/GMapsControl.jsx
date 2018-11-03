@@ -10,6 +10,7 @@ import {
   TrafficLayer,
   Marker,
 } from 'react-google-maps';
+import axios from 'axios';
 import AlertDialog from './AlertDialog';
 import { estimateCost } from './CostEstimater';
 
@@ -55,6 +56,7 @@ const GMapsControl = compose(
         }, timePerInterval);
         this.state.setLocationInterval(interval);
       }
+
       if (this.props.assignedDriver) {
         if (this.props.driverArriving && !this.state.hasDriverDirections) {
           const { data, assignedDriver } = this.props;
@@ -133,6 +135,10 @@ const GMapsControl = compose(
         atDestination: false,
         onArrivalToDestinationDialogClosed: routeCost => {
           console.log('payment stuff happens here, ', routeCost);
+          axios.post(backendRoutes.ARRIVAL, {
+            cost: routeCost,
+            location: this.props.to,
+          });
         },
         onDriverArrivedDialogClosed: () => {
           this.setState({
@@ -202,6 +208,27 @@ const GMapsControl = compose(
       defaultCenter={new google.maps.LatLng(37.3352, -121.8811)}
     >
       <TrafficLayer autoUpdate />
+      {props.coords &&
+        !props.directions && (
+          <Marker
+            position={
+              new window.google.maps.LatLng(
+                props.coords.latitude,
+                props.coords.longitude
+              )
+            }
+            icon={{
+              path:
+                'M 10, 10 m -7.5, 0 a 7.5,7.5 0 1,0 15,0 a 7.5,7.5 0 1,0 -15,0',
+              anchor: { x: 5, y: 5 },
+              strokeColor: 'blue',
+              strokeWeight: 1,
+              fillColor: 'darkblue',
+              fillOpacity: 1,
+            }}
+            labelContent="myLocation"
+          />
+        )}
       {props.route && props.onDirectionChange()}
       {props.directions && (
         <Fragment>

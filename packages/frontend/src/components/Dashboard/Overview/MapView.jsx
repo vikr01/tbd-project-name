@@ -21,6 +21,7 @@ function LiveGMapView({
   requestRide,
   assignedDriver,
   driverArriving,
+  coords,
 }: props) {
   if (showMap) {
     return (
@@ -50,6 +51,7 @@ function LiveGMapView({
             routeSet={routeSet}
             assignedDriver={assignedDriver}
             driverArriving={driverArriving}
+            coords={coords}
           />
         </div>
       </Fragment>
@@ -104,10 +106,10 @@ class MapView extends React.Component<Props> {
     distance: null,
   };
 
-  static getDerivedStateFromProps(nextProps) {
-    const { coords } = nextProps;
-    if (coords !== nextProps.coords) {
-      console.log('User location aquired');
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.coords !== state.coords && nextProps.coords != null) {
+      console.log('User location aquired, ', nextProps.coords);
+      return { coords: nextProps.coords };
     }
     return null;
   }
@@ -119,7 +121,7 @@ class MapView extends React.Component<Props> {
     console.log('isGeolocationEnabled', isGeolocationEnabled);
     if (!isGeolocationEnabled) {
       alert(
-        'Unable to locate you. Please enter your home address under Account Information'
+        'Unable to locate you. Please enable location service in order to get picked up from home'
       );
     }
     console.log('isGeolocationAvailable', isGeolocationAvailable);
@@ -165,6 +167,7 @@ class MapView extends React.Component<Props> {
       distance,
       driverArriving,
       assignedDriver,
+      coords,
     } = this.state;
     return (
       <Fragment>
@@ -186,6 +189,7 @@ class MapView extends React.Component<Props> {
           requestRide={() => this.requestRide()}
           driverArriving={driverArriving}
           assignedDriver={assignedDriver}
+          coords={coords}
         />
       </Fragment>
     );
@@ -198,5 +202,5 @@ export default geolocated({
   positionOptions: {
     enableHighAccuracy: false,
   },
-  userDecisionTimeout: 5000,
+  userDecisionTimeout: 25000,
 })(MapView);
