@@ -159,8 +159,7 @@ class Dashboard extends Component<Props> {
     if (!checkedForLogin) {
       return <Typography>Logging in...</Typography>;
     }
-    if (!redirectToLogin) {
-      // TODO: remove !
+    if (redirectToLogin) {
       return <Redirect to={routes.HOME} />;
     }
     return (
