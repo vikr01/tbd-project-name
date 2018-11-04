@@ -16,6 +16,12 @@ type Props = {
 };
 
 class AlertDialog extends React.Component<Props> {
+  static defaultProps = {
+    open: false,
+    onClose: () => {},
+    onOpen: () => {},
+  };
+
   state = {
     open: false,
     closing: false,
@@ -68,11 +74,5 @@ class AlertDialog extends React.Component<Props> {
     );
   }
 }
-
-AlertDialog.defaultProps = {
-  open: false,
-  onClose: () => {},
-  onOpen: () => {},
-};
 
 export default AlertDialog;
