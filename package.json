@@ -77,7 +77,8 @@
   },
   "cacheDirectories": [
     "node_modules",
-    "packages/*/node_modules"
+    "packages/backend/node_modules",
+    "packages/frontend/node_modules"
   ],
   "husky": {
     "hooks": {
