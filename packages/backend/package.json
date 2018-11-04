@@ -11,7 +11,7 @@
     "dev": "cross-env NODE_ENV=development node -r @babel/register src/index.js",
     "postinstall": "node -r @babel/register scripts/postinstall.js",
     "prestart": "yarn run stop",
-    "start": "cross-env NODE_ENV=production forever start dist/index.js",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
     "stop": "forever stop dist/app.js; exit 0",
     "test": "cross-env NODE_ENV=test jest"
   },
