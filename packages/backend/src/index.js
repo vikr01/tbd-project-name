@@ -122,6 +122,7 @@ process.on('unhandledRejection', err => {
     try {
       await connection.getRepository(User).save(newUser);
     } catch (err) {
+      console.log(err);
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
     }
 
@@ -172,7 +173,7 @@ process.on('unhandledRejection', err => {
    * Check if user is logged in
    */
   app.get(routes.LOGGED_IN, async (req, res, next) => {
-    if (req.session.user) {
+    if (req.session.username) {
       return res.status(HttpStatus.OK).send('User is logged in');
     }
     return res.status(HttpStatus.NOT_FOUND).send('User is not logged in');
