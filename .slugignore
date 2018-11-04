@@ -2,6 +2,7 @@
 .prettier*
 .stylelint*
 .travis.yml
+.vscode
 appveyor.yml
 *.code-workspace
 renovate.json
