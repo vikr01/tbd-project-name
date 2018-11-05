@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "lerna run build",
+    "clean": "lerna run clean",
     "dev": "lerna run dev",
     "heroku-postbuild": "yarn run build",
     "postinstall": "lerna run postinstall",
