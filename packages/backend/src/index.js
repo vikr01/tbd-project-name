@@ -2,6 +2,7 @@
 
 import 'pretty-error/start';
 import 'dotenv/config';
+import './checkEnv';
 import axios from 'axios';
 import express from 'express';
 import session from 'express-session';
