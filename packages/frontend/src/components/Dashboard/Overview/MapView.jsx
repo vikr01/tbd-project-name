@@ -40,6 +40,11 @@ function LiveGMapView({
               <Button variant="contained" onClick={requestRide}>
                 Make request
               </Button>
+              {assignedDriver && (
+                <Typography variant="h4">
+                  You have been assigned to driver {assignedDriver.username}
+                </Typography>
+              )}
               <br />
             </Fragment>
           )}
