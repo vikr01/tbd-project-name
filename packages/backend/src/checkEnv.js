@@ -5,6 +5,10 @@ import path from 'path';
 
 const pathToEnvFile = path.join(__dirname, '../.env');
 
+if (isHeroku) {
+  console.log('This is a heroku environment');
+}
+
 if (isHeroku && existsSync(pathToEnvFile)) {
   console.warn(
     chalk.yellow(
