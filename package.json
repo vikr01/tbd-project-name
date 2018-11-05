@@ -72,7 +72,7 @@
     "yarn": "^1.10.0"
   },
   "engines": {
-    "node": ">=10",
+    "node": ">=10 <11",
     "yarn": ">=1.10.x"
   },
   "cacheDirectories": [
