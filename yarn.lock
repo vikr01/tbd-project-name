@@ -5605,6 +5605,11 @@ is-glob@^4.0.0:
   dependencies:
     is-extglob "^2.1.1"
 
+is-heroku@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/is-heroku/-/is-heroku-2.0.0.tgz#6482d1e861435103ae9f69e66f9bd28eb4ea0bca"
+  integrity sha512-c4vHXwxwfIZlKOEAyk25XICIfKlqWwYct+2zt1IQfpn2qt6SNqTp41QabAUN5B9JJMj6WQ7prN4HeM2KUF/gKw==
+
 is-hexadecimal@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-hexadecimal/-/is-hexadecimal-1.0.2.tgz#b6e710d7d07bb66b98cb8cece5c9b4921deeb835"

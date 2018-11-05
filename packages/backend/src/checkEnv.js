@@ -1,3 +1,18 @@
+import chalk from 'chalk';
+import { existsSync } from 'fs';
+import isHeroku from 'is-heroku';
+import path from 'path';
+
+const pathToEnvFile = path.join(__dirname, '../.env');
+
+if (isHeroku && existsSync(pathToEnvFile)) {
+  console.warn(
+    chalk.yellow(
+      "You're using dotenv in a deployed environment, this could cause unexpected behavior."
+    )
+  );
+}
+
 const requiredEnvVars = [
   'NODE_ENV',
   'DB_HOST',
