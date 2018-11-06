@@ -64,7 +64,7 @@ export default class AccountInfoView extends Component {
     return (
       <Fragment>
         <Typography variant="h4" gutterBottom component="h2">
-          AccountInfoView
+          Account details
         </Typography>
         <div>
           <Typography variant="h5" className="accountOverviewItem">
