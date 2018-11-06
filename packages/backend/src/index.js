@@ -117,7 +117,11 @@ process.on('unhandledRejection', err => {
       firstName,
       lastName,
       accountType,
+      creditCard: null,
+      driverInfo: null,
     });
+
+    console.log(newUser);
 
     try {
       await connection.getRepository(User).save(newUser);
