@@ -2,6 +2,7 @@
 
 import 'pretty-error/start';
 import 'dotenv/config';
+import './checkEnv';
 import axios from 'axios';
 import express from 'express';
 import session from 'express-session';
@@ -117,7 +118,11 @@ process.on('unhandledRejection', err => {
       firstName,
       lastName,
       accountType,
+      creditCard: null,
+      driverInfo: null,
     });
+
+    console.log(newUser);
 
     try {
       await connection.getRepository(User).save(newUser);
@@ -380,7 +385,7 @@ process.on('unhandledRejection', err => {
   });
 
   // this sets the public directory to the frontend package's build directory
-  app.use('*', express.static(assets));
+  app.use(express.static(assets));
 
   // wait until the app starts
   await promisify(app.listen).bind(app)(port);
