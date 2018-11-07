@@ -322,7 +322,7 @@ process.on('unhandledRejection', err => {
   }
 
   app.get(routes.CLOSEST_DRIVER, async (req, res, next) => {
-    const { lat, lng, destination } = req.query;
+    const { lat, lng, destination, groupSize } = req.query;
 
     if (!correctLat(parseFloat(lat)) || !correctLong(parseFloat(lng))) {
       return res.status(HttpStatus.BAD_REQUEST).send('Invalid arguments');
@@ -331,7 +331,7 @@ process.on('unhandledRejection', err => {
     // query only active drivers
     const drivers = await connection.getRepository(Driver).find({ active: 1 });
     let closestDriver = {};
-    let leastTime = 10000000;
+    let leastTime = Number.POSITIVE_INFINITY;
     await forEach(drivers, async driver => {
       const result = await axios.get(
         'https://maps.googleapis.com/maps/api/distancematrix/json',
@@ -355,8 +355,28 @@ process.on('unhandledRejection', err => {
       return res.status(HttpStatus.NOT_FOUND).send('Could not find a driver');
     }
 
-    // add name of driver in response only if already authenticated
-    closestDriver.name = req.session.user;
+    const newPassenger = Object.assign(new Passenger(), {
+      username: req.session.username,
+      groupSize,
+    });
+
+    try {
+      await connection.getRepository(Passenger).save(newPassenger);
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
+
+    if (closestDriver.passengers) closestDriver.passengers.push(newPassenger);
+    else closestDriver.passengers = [newPassenger];
+
+    try {
+      await connection.getRepository(Driver).save(closestDriver);
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
+
+    // add user's driver to their session
+    req.session.driver = closestDriver;
 
     return res.status(HttpStatus.OK).json(closestDriver);
   });
