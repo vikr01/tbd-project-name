@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { CssBaseline, Paper, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import type { Node } from 'react';
-import EmailInput from './EmailInput';
+import UsernameInput from './UsernameInput';
 import PasswordInput from './PasswordInput';
 import ConfirmButton from './ConfirmButton';
 import DisplayStatus from '../DisplayStatus';
@@ -39,12 +39,12 @@ const SignIn = ({ handleSubmit, status }: Props): Node => (
           className="form"
           onSubmit={event => {
             event.preventDefault();
-            const user = event.target.elements.email.value;
+            const user = event.target.elements.username.value;
             const pass = event.target.elements.password.value;
             handleSubmit(user, pass);
           }}
         >
-          <EmailInput />
+          <UsernameInput />
           <PasswordInput />
           <ConfirmButton />
           <DisplayStatus status={status} />
