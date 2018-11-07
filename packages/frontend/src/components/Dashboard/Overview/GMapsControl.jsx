@@ -193,7 +193,6 @@ const GMapsControl = compose(
   })
 )(props => (
   <Fragment>
-    <Typography>{`at user: ${props.userInCar}`}</Typography>
     <AlertDialog
       open={props.atUserDialogShow}
       title="Driver arrived"
