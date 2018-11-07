@@ -210,8 +210,7 @@ process.on('unhandledRejection', err => {
    * This route handles displaying all user info
    */
   app.get(routes.USER, async (req, res, next) => {
-    // const name = req.session.username;
-    const name = 'driverFixed';
+    const name = req.session.username;
 
     let user;
     try {
