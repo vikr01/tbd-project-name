@@ -14,7 +14,7 @@ import path from 'path';
 import HttpStatus from 'http-status-codes';
 import { promisify } from 'util';
 import { forEach } from 'p-iteration';
-import { createConnection } from 'typeorm';
+import { createConnection, MoreThan } from 'typeorm';
 import frontendRoutes from 'tbd-frontend-name/src/routes';
 import { connectionOptions } from './db_connection';
 import routes from '../routes';
@@ -324,12 +324,19 @@ process.on('unhandledRejection', err => {
   app.get(routes.CLOSEST_DRIVER, async (req, res, next) => {
     const { lat, lng, destination, groupSize } = req.query;
 
-    if (!correctLat(parseFloat(lat)) || !correctLong(parseFloat(lng))) {
+    if (
+      !correctLat(parseFloat(lat)) ||
+      !correctLong(parseFloat(lng)) ||
+      !groupSize
+    ) {
       return res.status(HttpStatus.BAD_REQUEST).send('Invalid arguments');
     }
 
     // query only active drivers
-    const drivers = await connection.getRepository(Driver).find({ active: 1 });
+    const drivers = await connection.getRepository(Driver).find({
+      active: 1,
+      numOfSeats: MoreThan(groupSize - 1),
+    });
     let closestDriver = {};
     let leastTime = Number.POSITIVE_INFINITY;
     await forEach(drivers, async driver => {
@@ -368,6 +375,9 @@ process.on('unhandledRejection', err => {
 
     if (closestDriver.passengers) closestDriver.passengers.push(newPassenger);
     else closestDriver.passengers = [newPassenger];
+
+    // update driver's available seats
+    closestDriver.numOfSeats -= groupSize;
 
     try {
       await connection.getRepository(Driver).save(closestDriver);
