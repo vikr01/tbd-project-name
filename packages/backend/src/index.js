@@ -122,7 +122,26 @@ process.on('unhandledRejection', err => {
       driverInfo: null,
     });
 
-    console.log(newUser);
+    if (accountType === 'Driver') {
+      const newDriver = Object.assign(new Driver(), {
+        username,
+        currentLatitude: 0,
+        currentLongitude: 0,
+        rating: 0,
+        totalReviews: 0,
+        active: 0,
+        passengers: null,
+      });
+
+      try {
+        await connection.getRepository(Driver).save(newDriver);
+      } catch (err) {
+        console.log(err);
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+      }
+
+      newUser.driverInfo = newDriver;
+    }
 
     try {
       await connection.getRepository(User).save(newUser);
