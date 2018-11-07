@@ -322,6 +322,22 @@ process.on('unhandledRejection', err => {
   }
 
   app.get(routes.CLOSEST_DRIVER, async (req, res, next) => {
+    try {
+      const creditCard = await connection.getRepository(User).findOne({
+        select: ['creditCard'],
+        relations: ['creditCard'],
+        where: {
+          username: req.session.username,
+        },
+      });
+      if (!creditCard) {
+        res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ error: 'No credit card on file' });
+      }
+    } catch (err) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
+    }
     const { lat, lng, destination, groupSize } = req.query;
 
     if (
