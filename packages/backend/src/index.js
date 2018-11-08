@@ -364,7 +364,7 @@ process.on('unhandledRejection', err => {
     // query only active drivers
     const drivers = await connection.getRepository(Driver).find({
       active: 1,
-      numOfSeats: MoreThan(groupSize - 1),
+      numOfSeats: MoreThan(Number(groupSize) - 1),
     });
     let closestDriver = {};
     let leastTime = Number.POSITIVE_INFINITY;
