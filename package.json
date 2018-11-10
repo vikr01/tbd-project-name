@@ -72,11 +72,11 @@
     "stylelint": "^9.7.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended": "^2.1.0",
-    "yarn": "^1.10.0"
+    "yarn": "^1.12.3"
   },
   "engines": {
     "node": ">=10 <11",
-    "yarn": ">=1.10.x"
+    "yarn": ">=1.12.3"
   },
   "cacheDirectories": [
     "node_modules",
