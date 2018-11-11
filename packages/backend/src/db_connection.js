@@ -14,10 +14,10 @@ if (process.env.DB_TYPE === 'mysql') {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
   };
-} else if (process.env.DB_TYPE === 'sqlite') {
+} else if (process.env.DB_TYPE === 'sqljs') {
   dbCredentials = {
-    type: 'sqlite',
-    database: 'database.sqlite',
+    type: 'sqljs',
+    // database: 'database.sqlite',
   };
 }
 

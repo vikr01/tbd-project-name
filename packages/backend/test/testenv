@@ -1,4 +1,4 @@
-DB_TYPE=sqlite
+DB_TYPE=sqljs
 
 HASH_ALGO=sha256
 HASH_KEY=this-is-the-test-environment
