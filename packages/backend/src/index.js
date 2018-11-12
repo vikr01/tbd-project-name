@@ -1,16 +1,16 @@
 // @flow
 import 'dotenv/config';
+import './envVars/check';
 import chalk from 'chalk';
 import { promisify } from 'util';
 import { createConnection } from 'typeorm';
-import { connectionOptions } from './db_connection';
+import connectionOptions from './dbConfig';
 import server from './server';
+import { apiKey, hashFn, port, secret } from './envVars/parse';
 
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-const port: number = process.env.PORT || 2000;
 
 (async () => {
   // creates a connection to the database specified in connectionOptions
@@ -26,7 +26,12 @@ const port: number = process.env.PORT || 2000;
     throw err;
   }
 
-  const app = server(connection);
+  const app = server({
+    connection,
+    hashFn,
+    apiKey,
+    secret,
+  });
   // wait until the app starts
   await promisify(app.listen).bind(app)(port);
   console.log(`App started on port ${port}`);

@@ -1,7 +1,6 @@
 // @flow
 
 import 'pretty-error/start';
-import './checkEnv';
 import axios from 'axios';
 import express from 'express';
 import session from 'express-session';
@@ -18,10 +17,18 @@ import { User } from './entity/User';
 import { Driver } from './entity/Driver';
 import { CreditCard } from './entity/CreditCard';
 import { Passenger } from './entity/Passenger';
-import generateSignature from './hasher';
+
+type params = {
+  connection: {
+    getRepository: Function,
+  },
+  secret: string,
+  apiKey: string,
+  hashFn: string => string,
+};
 
 // this is where the app lifts
-export default connection => {
+export default ({ connection, secret, apiKey, hashFn }: params) => {
   const app = express();
 
   app.use(bodyParser.json({ type: 'application/json' }));
@@ -32,7 +39,7 @@ export default connection => {
     session({
       resave: false,
       saveUninitialized: false,
-      secret: process.env.SESSION_SECRET,
+      secret,
     })
   );
 
@@ -82,7 +89,7 @@ export default connection => {
       return res.status(HttpStatus.NOT_ACCEPTABLE).send();
     }
 
-    const signature = generateSignature(password);
+    const signature = hashFn(password);
 
     const newUser = Object.assign(new User(), {
       password: signature,
@@ -143,7 +150,7 @@ export default connection => {
         .send('Username and/or password not specified');
     }
 
-    const signature = generateSignature(password);
+    const signature = hashFn(password);
 
     const user = await connection
       .getRepository(User)
@@ -348,7 +355,7 @@ export default connection => {
             units: 'imperial',
             origins: `${driver.currentLatitude},${driver.currentLongitude}`,
             destinations: `${lat},${lng}`,
-            key: process.env.API_KEY,
+            key: apiKey,
           },
         }
       );

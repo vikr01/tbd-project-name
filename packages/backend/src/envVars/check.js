@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { existsSync } from 'fs';
 import isHeroku from 'is-heroku';
 import path from 'path';
+import { required as requiredEnvVars } from './list';
 
 const pathToEnvFile = path.join(__dirname, '../.env');
 
@@ -16,19 +17,6 @@ if (isHeroku && existsSync(pathToEnvFile)) {
     )
   );
 }
-
-const NON_SQLITE_VARS = ['DB_HOST', 'DB_PASSWORD', 'DB_DATABASE'];
-
-const requiredEnvVars = [
-  'NODE_ENV',
-  'DB_TYPE',
-  ...(process.env.DB_TYPE !== 'sqljs' ? NON_SQLITE_VARS : []),
-  'HASH_ALGO',
-  'HASH_KEY',
-  'DIGESTION_TYPE',
-  'SESSION_SECRET',
-  'API_KEY',
-];
 
 const unsetEnvVars = requiredEnvVars.filter(
   envVar => process.env[envVar] === undefined
