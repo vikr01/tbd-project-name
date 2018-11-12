@@ -1487,7 +1487,7 @@
     "@babel/runtime" "7.0.0"
     recompose "^0.29.0"
 
-"@material-ui/lab@^3.0.0-alpha.21":
+"@material-ui/lab@^3.0.0-alpha.23":
   version "3.0.0-alpha.23"
   resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-3.0.0-alpha.23.tgz#816e9821c1b25b608856639605ff116584d45b9d"
   integrity sha512-+wdaCf2oTh8gnuN8QyEYAxiSfMZ8suZMb4fBBVSa1HrxPGFXopOM435lM1WfZAh/BQaogH5DlXIqxkNXIkpJlA==
