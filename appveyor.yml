@@ -37,4 +37,8 @@ test_script:
   - yarn run lint
   # - yarn run flow
   - yarn run build
-  - yarn run test-coverage
+  - yarn test
+
+on_success:
+  - yarn global add codecov
+  - codecov

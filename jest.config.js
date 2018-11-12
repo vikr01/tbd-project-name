@@ -3,12 +3,15 @@ module.exports = {
 
   collectCoverageFrom: [
     '<rootDir>/packages/*/**/*.js',
+    '<rootDir>/packages/*/**/*.jsx',
     '!<rootDir>/packages/scripts/**',
     '!<rootDir>/packages/dist/**',
     '!<rootDir>/packages/test/**',
     '!<rootDir>/packages/.*',
     '!<rootDir>/.*',
   ],
+
+  collectCoverage: true,
 
   coverageDirectory: './coverage/',
 
