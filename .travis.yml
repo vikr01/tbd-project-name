@@ -21,7 +21,4 @@ install: yarn install --ignore-scripts --ignore-engines
 script:
   - yarn run lint
   - yarn run build
-  - yarn test
-
-after_success:
-  - bash < (curl -s https://codecov.io/bash)
+  - yarn run test-coverage

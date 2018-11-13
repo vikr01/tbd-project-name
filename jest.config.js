@@ -1,23 +1,17 @@
 module.exports = {
-  // rootDir: __dirname,
+  rootDir: __dirname,
 
   collectCoverageFrom: [
     '**/*.{js,jsx}',
-    //   '!**/packages/scripts/**',
-    //   '!**/packages/dist/**',
-    //   // '!<rootDir>/packages/test/**',
-    //   // '!<rootDir>/packages/.*',
-    //   // '!<rootDir>/.*',
+    '!**/.*',
+    '!**/.*/**',
+    '!*.config.js',
+    '!packages/*/*.config.js',
+    '!**/webpack.config.*',
+    '!packages/*/dist/**',
+    '!packages/*/scripts/**',
+    '!coverage/**',
   ],
-
-  coveragePathIgnorePatterns: [
-    '**/node_modules/',
-    '**/dist',
-    'packages/.*',
-    'packages/scripts/**',
-  ],
-
-  collectCoverage: true,
 
   coverageDirectory: './coverage/',
 };
