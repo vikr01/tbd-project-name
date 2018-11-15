@@ -5,21 +5,21 @@
   // authenticate
   "AUTH": "/api/authenticate",
   "SIGNUP": "/api/signup",
-  "LOGGED_IN": "/api/loggedIn",
+  "LOGGED_IN": "/api/logged-in",
 
   // users
   "USER": "/api/users",
-  "MY_DRIVER": "/api/myDriver",
+  "MY_DRIVER": "/api/my-driver",
 
   //drivers
   "DRIVER": "/drivers/:username",
   "DRIVERS": "/drivers",
-  "ALL_ACTIVE_DRIVERS": "/driversAll",
+  "ALL_ACTIVE_DRIVERS": "/drivers-all",
 
   //location api
-  "CLOSEST_DRIVER": "/api/nearestDriver",
+  "CLOSEST_DRIVER": "/api/nearest-driver",
   "ARRIVED": "/api/arrival",
 
   //credit card api
-  "ADDCREDITCARD": "/api/creditCard"
+  "ADDCREDITCARD": "/api/credit-card"
 }
