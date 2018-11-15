@@ -1,5 +1,6 @@
 {
   "LOGIN": "/login",
+  "LOGOUT": "/logout",
 
   // authenticate
   "AUTH": "/api/authenticate",
