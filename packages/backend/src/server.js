@@ -73,13 +73,13 @@ export default ({ connection, secret, apiKey, hashFn }: params) => {
       req.session.destroy(error => {
         if (error) {
           console.log(chalk.red('Problem doing logout'));
-          res.statusCode(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
         }
-        res.statusCode(HttpStatus.OK).send();
+        res.status(HttpStatus.OK).send();
       });
     } catch (err) {
       console.log(err);
-      res.statusCode(HttpStatus.IM_A_TEAPOT).send(err);
+      res.status(HttpStatus.IM_A_TEAPOT).send(err);
     }
   });
 
