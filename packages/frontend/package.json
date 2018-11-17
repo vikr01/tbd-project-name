@@ -45,7 +45,7 @@
     "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4",
-    "write-file-webpack-plugin": "^4.4.1"
+    "write-file-webpack-plugin": "^4.5.0"
   },
   "productName": "TBD FRONTEND NAME"
 }
