@@ -31,7 +31,7 @@
     "ncp": "^2.0.0",
     "pretty-error": "^2.1.1",
     "strip-json-comments": "^2.0.1",
-    "typeorm": "^0.2.8"
+    "typeorm": "^0.2.9"
   },
   "peerDependencies": {
     "tbd-frontend-name": "*"
