@@ -384,7 +384,7 @@ const GMapsControl = compose(
       onClose={props.onDriverArrivedDialogClosed}
     />
     <SimpleSnackbar open={props.snackbarOpen} message={props.snackbarMessage} />
-    {props.distance && (
+    {!props.distance ? null : (
       <AlertDialog
         open={props.atDestinationDialogShow}
         title="Arrived"
@@ -410,14 +410,14 @@ const GMapsControl = compose(
     )}
     <GoogleMap
       ref={map =>
-        map && props.boundsDriver && map.fitBounds(props.boundsDriver)
+        map && props.boundsDriver ? map.fitBounds(props.boundsDriver) : null
       }
       defaultZoom={11}
       defaultCenter={new google.maps.LatLng(37.3352, -121.8811)}
     >
       <TrafficLayer autoUpdate />
       <DrawUserPosition coords={props.coords} directions={props.directions} />
-      {props.directions && (
+      {!props.directions ? null : (
         <Fragment>
           <Polyline
             path={props.directions}
@@ -432,7 +432,7 @@ const GMapsControl = compose(
 
           <DrawMarker coords={props.data.from} />
           <DrawMarker coords={props.data.to} />
-          {props.driverLocation && (
+          {!props.driverLocation ? null : (
             <Marker
               position={
                 new window.google.maps.LatLng(
@@ -456,13 +456,14 @@ const GMapsControl = compose(
           )}
         </Fragment>
       )}
-      {props.allDrivers &&
-        props.allDrivers.map(t => (
-          <DrawCarMarker
-            key={t.username}
-            coords={{ lat: t.currentLatitude, lng: t.currentLongitude }}
-          />
-        ))}
+      {!props.allDrivers
+        ? null
+        : props.allDrivers.map(t => (
+            <DrawCarMarker
+              key={t.username}
+              coords={{ lat: t.currentLatitude, lng: t.currentLongitude }}
+            />
+          ))}
     </GoogleMap>
   </Fragment>
 ));
