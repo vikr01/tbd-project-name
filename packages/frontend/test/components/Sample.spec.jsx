@@ -8,8 +8,8 @@ describe('Sample component', () => {
     } = await import('tbd-frontend-name/src/components/Sample');
     const sample = <Sample />;
 
-    const tree = renderer.create(sample).toJSON();
+    const tree = renderer.create(sample);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.toJSON()).toMatchSnapshot();
   });
 });
