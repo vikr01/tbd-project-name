@@ -39,7 +39,9 @@
       {
         "order": [
           "type-annotations",
+          "state",
           "static-methods",
+          "constructor",
           "lifecycle",
           "everything-else",
           "render"
