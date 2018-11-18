@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Overall component should match exact Sample snapshot 1`] = `
+exports[`Overall component should match exact snapshot 1`] = `
 <div>
   Loading...
 </div>
 `;
 
-exports[`Overall component should match exact Sample snapshot 2`] = `
+exports[`Overall component should match exact snapshot 2`] = `
 <div
   style={
     Object {
