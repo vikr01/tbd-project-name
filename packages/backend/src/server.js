@@ -334,7 +334,7 @@ export default ({ connection, secret, apiKey, hashFn }: params) => {
     }
 
     Object.entries(req.body).forEach(([key, value]) => {
-      if (driver.hasOwnProperty(key)) {
+      if (driver[key] !== undefined) {
         driver[key] = value;
       } else {
         console.warn(
