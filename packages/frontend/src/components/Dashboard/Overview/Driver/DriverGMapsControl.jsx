@@ -315,17 +315,16 @@ const DriverGMapsControl = compose(
         </Fragment>
       )}
 
-      {props.driverInfo &&
-        !props.directions && (
-          <DrawCarMarker
-            key={props.driverInfo.username}
-            coords={{
-              lat: props.driverInfo.currentLatitude,
-              lng: props.driverInfo.currentLongitude,
-            }}
-            color="red"
-          />
-        )}
+      {props.driverInfo && !props.directions ? (
+        <DrawCarMarker
+          key={props.driverInfo.username}
+          coords={{
+            lat: props.driverInfo.currentLatitude,
+            lng: props.driverInfo.currentLongitude,
+          }}
+          color="red"
+        />
+      ) : null}
     </GoogleMap>
   </Fragment>
 ));
