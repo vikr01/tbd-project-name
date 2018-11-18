@@ -16,6 +16,13 @@ import AlertDialog from './AlertDialog';
 import { estimateCost } from './CostEstimater';
 import SimpleSnackbar from './SimpleSnackbar';
 
+const getDiscountText = ({ distance, discount, discountReason }) =>
+  `You have arrived at your destination! Your credit card was charged $${(
+    estimateCost(distance.value) - (discount || 0)
+  ).toFixed(2)}. ${
+    !discount ? '' : `You received a discount of $${discount} ${discountReason}`
+  }`;
+
 const GMapsControl = compose(
   withProps({
     googleMapURL:
@@ -389,16 +396,7 @@ const GMapsControl = compose(
       <AlertDialog
         open={props.atDestinationDialogShow}
         title="Arrived"
-        text={`You have arrived at your destination! Your credit card was charged $${(
-          estimateCost(props.distance.value) -
-          (props.discount ? props.discount : 0)
-        ).toFixed(2)}. ${
-          props.discount
-            ? `You received a discount of $${props.discount} ${
-                props.discountReason
-              }`
-            : ''
-        }`}
+        text={getDiscountText(props)}
         onClose={() => {
           props.onArrivalToDestinationDialogClosed(
             estimateCost(
@@ -467,6 +465,7 @@ const GMapsControl = compose(
     </GoogleMap>
   </Fragment>
 ));
+
 type DrawMarkerProps = {
   coords: object,
 };
