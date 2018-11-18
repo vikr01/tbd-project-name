@@ -174,9 +174,9 @@ const DecideLocation = ({
   disableRequestButtons,
 }: props) => (
   <Fragment>
-    {haveUserPosition && (
+    {!haveUserPosition ? null : (
       <Fragment>
-        {useLoc && (
+        {!useLoc ? null : (
           <Fragment>
             <Button
               variant="contained"
@@ -188,7 +188,7 @@ const DecideLocation = ({
             <Typography variant="h5">Currently using your location</Typography>
           </Fragment>
         )}
-        {!useLoc && (
+        {useLoc ? null : (
           <Button
             variant="contained"
             onClick={() => setUseLoc(true)}
@@ -198,7 +198,7 @@ const DecideLocation = ({
           </Button>
         )}
         <div style={{ height: '8px' }} />
-        {!useLoc && (
+        {useLoc ? null : (
           <MyStandaloneSearchBox
             onSet={(lat, lng) => handleLocationEnteredChange(lat, lng)}
             placeholder="current location"
@@ -206,7 +206,7 @@ const DecideLocation = ({
         )}
       </Fragment>
     )}
-    {!haveUserPosition && (
+    {haveUserPosition ? null : (
       <Fragment>
         <Typography variant="h5">
           Enter your current location (Your browser is unable to find your
