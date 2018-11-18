@@ -32,7 +32,10 @@
       "single",
       {"avoidEscape": true, "allowTemplateLiterals": true}
     ],
-    "react/jsx-filename-extension": ["error", {"extensions": [".jsx"]}],
+    "react/jsx-filename-extension": [
+      "error",
+      {"extensions": [".jsx", ".spec.js"]}
+    ],
     "react/sort-comp": [
       "error",
       {
