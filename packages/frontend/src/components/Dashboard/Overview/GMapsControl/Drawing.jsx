@@ -3,21 +3,19 @@ import React from 'react';
 import { Marker } from 'react-google-maps';
 
 type DrawMarkerProps = {
-  coords: object,
+  coords: Object,
 };
 
 export const DrawMarker = ({ coords }: DrawMarkerProps) => {
   if (!coords) return null;
-  return (
-    <Marker position={new window.google.maps.LatLng(coords.lat, coords.lng)} />
-  );
+  return <Marker position={new google.maps.LatLng(coords.lat, coords.lng)} />;
 };
 
 export const DrawCarMarker = ({ coords }: DrawMarkerProps) => {
   if (!coords) return null;
   return (
     <Marker
-      position={new window.google.maps.LatLng(coords.lat, coords.lng)}
+      position={new google.maps.LatLng(coords.lat, coords.lng)}
       optimized={false}
       icon={{
         path:
@@ -37,9 +35,7 @@ export const DrawUserPosition = ({ coords }: DrawMarkerProps) => {
   if (!coords) return null;
   return (
     <Marker
-      position={
-        new window.google.maps.LatLng(coords.latitude, coords.longitude)
-      }
+      position={new google.maps.LatLng(coords.latitude, coords.longitude)}
       icon={{
         path: 'M 10, 10 m -7.5, 0 a 7.5,7.5 0 1,0 15,0 a 7.5,7.5 0 1,0 -15,0',
         anchor: { x: 5, y: 5 },

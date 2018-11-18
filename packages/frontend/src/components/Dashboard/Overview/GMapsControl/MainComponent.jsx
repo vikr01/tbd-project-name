@@ -2,13 +2,14 @@
 import React, { Fragment } from 'react';
 import { GoogleMap, Polyline, TrafficLayer, Marker } from 'react-google-maps';
 import AlertDialog from '../AlertDialog';
-import { DrawCarMarker, DrawMarker, DrawUserPosition } from './Drawing';
+import { DrawMarker, DrawUserPosition } from './Drawing';
 import SimpleSnackbar from '../SimpleSnackbar';
 import { estimateCost } from '../CostEstimater';
+import DrawnCarMarkers from './DrawnCarMarkers';
 
 type Props = any;
 
-const MainComponent = (props: any) => {
+const MainComponent = (props: Props) => {
   const {
     allDrivers,
     atDestinationDialogShow,
@@ -27,6 +28,7 @@ const MainComponent = (props: any) => {
     snackbarOpen,
     snackbarMessage,
   } = props;
+
   return (
     <Fragment>
       <AlertDialog
@@ -79,10 +81,7 @@ const MainComponent = (props: any) => {
             {!driverLocation ? null : (
               <Marker
                 position={
-                  new window.google.maps.LatLng(
-                    driverLocation.lat,
-                    driverLocation.lng
-                  )
+                  new google.maps.LatLng(driverLocation.lat, driverLocation.lng)
                 }
                 optimized={false}
                 icon={{
@@ -100,14 +99,7 @@ const MainComponent = (props: any) => {
             )}
           </Fragment>
         )}
-        {!allDrivers
-          ? null
-          : allDrivers.map(t => (
-              <DrawCarMarker
-                key={t.username}
-                coords={{ lat: t.currentLatitude, lng: t.currentLongitude }}
-              />
-            ))}
+        <DrawnCarMarkers allDrivers={allDrivers} />
       </GoogleMap>
     </Fragment>
   );
