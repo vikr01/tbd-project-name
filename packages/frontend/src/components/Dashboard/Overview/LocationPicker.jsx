@@ -33,14 +33,28 @@ export default class LocationPicker extends Component<Props> {
     this.setState({ useLoc: value });
   };
 
+  onSendRequestToAirport = () => {
+    const { haveUserPosition, sendRequestToAirport } = this.props;
+
+    const { enteredLocation, useLoc, value } = this.state;
+
+    if (haveUserPosition && useLoc) {
+      return sendRequestToAirport(value);
+    }
+
+    const { lat, lng } = enteredLocation;
+
+    return sendRequestToAirport(value, lat, lng);
+  };
+
   render() {
     const {
-      show,
-      sendRequestToAirport,
-      sendRequestFromAirport,
-      haveUserPosition,
       disableRequestButtons,
+      haveUserPosition,
+      show,
+      sendRequestFromAirport,
     } = this.props;
+
     const { useLoc } = this.state;
     const { value, enteredLocation, destinationSet } = this.state;
     if (show) {
@@ -89,15 +103,7 @@ export default class LocationPicker extends Component<Props> {
                 (!useLoc && enteredLocation === null) ||
                 disableRequestButtons
               }
-              onClick={() =>
-                haveUserPosition && useLoc
-                  ? sendRequestToAirport(value)
-                  : sendRequestToAirport(
-                      value,
-                      enteredLocation.lat,
-                      enteredLocation.lng
-                    )
-              }
+              onClick={this.onSendRequestToAirport}
             >
               Show route
             </Button>
