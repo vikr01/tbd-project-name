@@ -15,14 +15,14 @@ type Props = {
 };
 
 class AlertDialog extends React.Component<Props> {
-  static defaultProps = {
-    onClose: () => {},
-    onOpen: () => {},
-  };
-
   state = {
     open: false,
     closing: false,
+  };
+
+  static defaultProps = {
+    onClose: () => {},
+    onOpen: () => {},
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {

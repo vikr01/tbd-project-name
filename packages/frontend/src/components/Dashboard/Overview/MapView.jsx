@@ -110,6 +110,7 @@ type Props = {
   showMap: boolean,
   startRequest: func,
 };
+
 class MapView extends React.Component<Props> {
   state = {
     data: {
