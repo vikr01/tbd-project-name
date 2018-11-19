@@ -112,3 +112,9 @@ Then start the application in production by running:
 ```bash
 yarn start
 ```
+
+## Maintainers
+
+- Vikram Rangaraj: [@vikr01](https://github.com/vikr01)
+- Thomas (Tom) Pedersen: [@toep](https://github.com/toep)
+- Suraj Setty: [@surajsetty97](https://github.com/surajsetty97)
