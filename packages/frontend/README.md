@@ -6,6 +6,8 @@
 
 ## Run in Development Mode
 
+First, you'll need to make sure the `backend` is running so that API calls can be proxied to it. See [the backend's instructions for how to start its server](../backend).
+
 To start the development server, run:
 
 ```bash
