@@ -64,7 +64,7 @@ See [the `dev` branch](https://github.com/vikr01/toms-shuttles/tree/dev) if you 
 
 You'll need the following:
 
-- [Node.js with a version `>=10` ](https://nodejs.org/en/download/). (You can also [install Node.js with a package manager](https://nodejs.org/en/download/package-manager/).)
+- [Node.js with a version `>=10`](https://nodejs.org/en/download/). (You can also [install Node.js with a package manager](https://nodejs.org/en/download/package-manager/).)
 - [`yarn` with a version `>=1.10`](https://yarnpkg.com/en/docs/install).
 
 ## Installation
