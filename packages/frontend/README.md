@@ -1,7 +1,7 @@
-# TBD PROJECT FRONTEND
+# Tom's Shuttle Service - Frontend
 
-[![Dependency Status](https://david-dm.org/vikr01/tbd-project-name/status.svg?path=packages/frontend)](https://david-dm.org/vikr01/tbd-project-name?path=packages/frontend)
-[![DevDependency Status](https://david-dm.org/vikr01/tbd-project-name/dev-status.svg?path=packages/frontend)](https://david-dm.org/vikr01/tbd-project-name?path=packages/frontend&type=dev)
+[![Dependency Status](https://david-dm.org/vikr01/toms-shuttles/status.svg?path=packages/frontend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/frontend)
+[![DevDependency Status](https://david-dm.org/vikr01/toms-shuttles/dev-status.svg?path=packages/frontend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/frontend&type=dev)
 
 ## Run in Development Mode
 
