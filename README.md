@@ -56,6 +56,17 @@
 
 </div>
 
+## About
+
+This project was made by students for a class.
+
+The goal of the project was to create a shuttle service using Google Maps API.
+
+There are two kinds of users:
+
+- Client: a user looking to schedule a trip from an airport to a destination, or from a location to an airport.
+- Driver: a user who picks clients up and takes them to their destinations.
+
 ## Getting Started
 
 See [the `master` branch](https://github.com/vikr01/toms-shuttles/tree/master) if you want to use the latest stable version.
