@@ -47,6 +47,7 @@
 [![Travis Build Status](https://img.shields.io/travis/com/vikr01/toms-shuttles.svg?label=linux/macOS&logo=linux)](https://travis-ci.org/vikr01/toms-shuttles)
 [![Appveyor Build Status](https://img.shields.io/appveyor/ci/vikr01/toms-shuttles.svg?label=windows&logo=windows)](https://ci.appveyor.com/project/vikr01/toms-shuttles/branch/master)
 [![Master Coverage Status](https://img.shields.io/codecov/c/github/vikr01/toms-shuttles/master.svg?label=coverage&logo=codecov)](https://codecov.io/gh/vikr01/toms-shuttles/branch/master)
+[![Dev Coverage Status](<https://img.shields.io/codecov/c/github/vikr01/toms-shuttles/dev.svg?label=coverage%%20(dev)&logo=codecov>)](https://codecov.io/gh/vikr01/toms-shuttles/branch/dev)
 
 [![Dependency Status](https://img.shields.io/david/vikr01/toms-shuttles.svg?label=dependencies)](https://david-dm.org/vikr01/toms-shuttles)
 [![DevDependency Status](https://img.shields.io/david/dev/vikr01/toms-shuttles.svg?label=devDependencies)](https://david-dm.org/vikr01/toms-shuttles?type=dev)
