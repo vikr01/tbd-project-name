@@ -14,6 +14,23 @@ To start the development server, run:
 yarn dev
 ```
 
+### Choosing a specific port
+
+To specify a port, set an environment variable `PORT` first:
+
+```bash
+export PORT=4000
+```
+
+In this case, the server will be launched on [port 4000](http://localhost:3000).
+
+Alternatively, you can set your `PORT` environment variable in the `.env` file generated from [`.env.example`](./.env.example) after installation.
+
+```bash
+# .env file
+PORT=4000
+```
+
 ## Create Production Build
 
 Build the package by running:
@@ -33,21 +50,4 @@ import express from 'express';
 const app = express();
 // set express routes here
 app.use(express.static(assets));
-```
-
-## Choosing a specific port
-
-To specify a port, set an environment variable `PORT` first:
-
-```bash
-export PORT=4000
-```
-
-In this case, the server will be launched on [port 4000](http://localhost:3000).
-
-Alternatively, you can set your `PORT` environment variable in the `.env` file generated from [`.env.example`](./.env.example) after installation.
-
-```bash
-# .env file
-PORT=4000
 ```
