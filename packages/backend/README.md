@@ -53,7 +53,7 @@ DB_DATABASE=sample_database_name # the name of the database being used
 
 NOTE: If you don't want to launch a database, you can use [`sql.js`](https://github.com/kripken/sql.js/).
 
-#### Synchronization
+##### Synchronization
 
 You're probably going to want your database to synchronize during development -- having the database change to fit the schema set by the code.
 
@@ -65,6 +65,15 @@ SYNCHRONIZE=true
 
 # command line
 yarn cross-env SYNCHRONIZE=true <command>
+```
+
+### Google Maps API Usage
+
+[You'll need an API key for Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key). Set the API key as an environment variable `API_KEY`:
+
+```bash
+# .env file
+API_KEY=<my-api-key>
 ```
 
 ## Run in Development Mode

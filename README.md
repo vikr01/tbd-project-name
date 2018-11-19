@@ -20,6 +20,10 @@
     <img alt="Express" height="60" 
       src="https://avatars.githubusercontent.com/u/5658226"/>
   </a>
+  <a href="https://developers.google.com/maps/" rel="noopener" target="_blank">
+    <img alt="Google Maps API" height="60" 
+      src="  https://avatars.githubusercontent.com/u/3717923"/>
+  </a>
   <a href="https://webpack.js.org" rel="noopener" target="_blank">
     <img alt="Webpack"  height="60" src="https://raw.githubusercontent.com/webpack/media/master/logo/icon.png"/>
   </a> 
