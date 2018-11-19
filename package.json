@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "toms-shuttles",
   "license": "MIT",
   "author": "Vikram Rangaraj <vik120@icloud.com> (https://github.com/vikr01)",
   "contributors": [
@@ -7,6 +8,7 @@
     "Thomas Pedersen <thoepedersen@gmail.com> (https://github.com/toep)"
   ],
   "repository": "https://github.com/vikr01/toms-shuttles.git",
+  "version": "0.2.0",
   "workspaces": [
     "packages/*"
   ],
