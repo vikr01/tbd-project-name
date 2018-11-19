@@ -40,7 +40,7 @@
 
 <div align="center">
 
-![version](https://img.shields.io/badge/version-0.2.0-blue.svg)
+[![version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/vikr01/toms-shuttles/releases)
 [![Deployed with Heroku](https://img.shields.io/badge/deployed%20with-heroku-purple.svg?logo=heroku)](https://sjshuttle.herokuapp.com)
 [![Deploy previews by Netlify](https://img.shields.io/badge/deploy%20previews%20by-netlify-teal.svg?logo=netlify)](https://toms-shuttles.netlify.com)
 
