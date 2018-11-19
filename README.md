@@ -8,6 +8,10 @@
 <div align="center">
   <a href="https://reactjs.org" rel="noopener" target="_blank">
     <img alt="React" height="60" 
+      src="https://raw.githubusercontent.com/yarnpkg/assets/master/yarn-kitten-circle.png"/>
+  </a>
+  <a href="https://reactjs.org" rel="noopener" target="_blank">
+    <img alt="React" height="60" 
       src="https://avatars.githubusercontent.com/u/6412038"/>
   </a>
   <a href="https://material-ui.com/" rel="noopener" target="_blank">
@@ -50,6 +54,13 @@
 [![Renovate Enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovatebot)](https://renovatebot.com/)
 
 </div>
+
+## Getting Started
+
+You'll need the following:
+
+- [Node.js with a version `>=10` ](https://nodejs.org/en/download/). (You can also [install Node.js with a package manager](https://nodejs.org/en/download/package-manager/).)
+- [`yarn` with a version `>=1.10`](https://yarnpkg.com/en/docs/install).
 
 ## Installation
 
