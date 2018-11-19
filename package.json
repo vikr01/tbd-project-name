@@ -22,8 +22,8 @@
     "lint-fix": "yarn run lint --fix",
     "postlint-fix": "prettier --ignore-path .eslintignore --write './**/*.{js,jsx,json,md,css,scss}'",
     "prepare": "lerna run prepare",
-    "start": "yarn workspace backend start",
-    "stop": "yarn workspace backend run stop",
+    "start": "yarn workspace toms-shuttles-backend start",
+    "stop": "yarn workspace toms-shuttles-backend run stop",
     "test": "cross-env NODE_ENV=test jest",
     "test-coverage": "yarn test --coverage && codecov"
   },
