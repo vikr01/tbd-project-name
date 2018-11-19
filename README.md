@@ -1,11 +1,16 @@
 # Tom's Shuttle Service
 
-[![Travis Build Status](https://travis-ci.org/vikr01/toms-shuttles.svg?branch=master)](https://travis-ci.org/vikr01/toms-shuttles)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/vikr01/toms-shuttles?svg=true)](https://ci.appveyor.com/project/vikr01/toms-shuttles/branch/master)
-[![Dependency Status](https://david-dm.org/vikr01/toms-shuttles/status.svg)](https://david-dm.org/vikr01/toms-shuttles)
-[![DevDependency Status](https://david-dm.org/vikr01/toms-shuttles/dev-status.svg)](https://david-dm.org/vikr01/toms-shuttles?type=dev)
-[![Master Coverage Status](https://img.shields.io/codecov/c/github/vikr01/toms-shuttles/master.svg)](https://codecov.io/gh/vikr01/toms-shuttles/branch/master)
-[![Dev Coverage Status](https://img.shields.io/codecov/c/github/vikr01/toms-shuttles/dev.svg)](https://codecov.io/gh/vikr01/toms-shuttles/branch/dev)
+![version](https://img.shields.io/badge/version-0.2.0-blue.svg)
+[![Deployed with Heroku](https://img.shields.io/badge/deployed%20with-heroku-purple.svg?logo=heroku)](https://sjshuttle.herokuapp.com)
+
+[![Travis Build Status](https://img.shields.io/travis/com/vikr01/toms-shuttles.svg?label=linux/macOS&logo=linux)](https://travis-ci.org/vikr01/toms-shuttles)
+[![Appveyor Build Status](https://img.shields.io/appveyor/ci/vikr01/toms-shuttles.svg?label=windows&logo=windows)](https://ci.appveyor.com/project/vikr01/toms-shuttles/branch/master)
+[![Master Coverage Status](https://img.shields.io/codecov/c/github/vikr01/toms-shuttles/master.svg?label=coverage&logo=codecov)](https://codecov.io/gh/vikr01/toms-shuttles/branch/master)
+
+[![Dependency Status](https://img.shields.io/david/vikr01/toms-shuttles.svg?label=dependencies)](https://david-dm.org/vikr01/toms-shuttles)
+[![DevDependency Status](https://img.shields.io/david/dev/vikr01/toms-shuttles.svg?label=devDependencies)](https://david-dm.org/vikr01/toms-shuttles?type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/vikr01/toms-shuttles/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vikr01/toms-shuttles?targetFile=package.json)
+[![Renovate Enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovatebot)](https://renovatebot.com/)
 
 ## Installation
 
@@ -15,7 +20,7 @@ First, clone the repo via git:
 git clone https://github.com/vikr01/toms-shuttles.git your-project-name
 ```
 
-And then install dependencies with yarn:
+And then install dependencies with `yarn`:
 
 ```bash
 cd your-project-name

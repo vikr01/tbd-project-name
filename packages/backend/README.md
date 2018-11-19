@@ -1,7 +1,8 @@
 # Tom's Shuttle Service - Backend
 
-[![Dependency Status](https://david-dm.org/vikr01/toms-shuttles/status.svg?path=packages/backend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/backend)
-[![DevDependency Status](https://david-dm.org/vikr01/toms-shuttles/dev-status.svg?path=packages/backend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/backend&type=dev)
+[![Dependency Status](https://img.shields.io/david/vikr01/toms-shuttles.svg?label=dependencies&path=packages/backend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/backends)
+[![DevDependency Status](https://img.shields.io/david/dev/vikr01/toms-shuttles.svg?label=devDependencies&path=packages/backend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/backend&type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/vikr01/toms-shuttles/badge.svg?targetFile=packages/backend/package.json)](https://snyk.io/test/github/vikr01/toms-shuttles?targetFile=packages/backend/package.json)
 
 ## Run in Development Mode
 
