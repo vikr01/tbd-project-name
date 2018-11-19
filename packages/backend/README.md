@@ -4,7 +4,17 @@
 [![DevDependency Status](https://img.shields.io/david/dev/vikr01/toms-shuttles.svg?label=devDependencies&path=packages/backend)](https://david-dm.org/vikr01/toms-shuttles?path=packages/backend&type=dev)
 [![Known Vulnerabilities](https://snyk.io/test/github/vikr01/toms-shuttles/badge.svg?targetFile=packages/backend/package.json)](https://snyk.io/test/github/vikr01/toms-shuttles?targetFile=packages/backend/package.json)
 
-## Getting started
+## Getting Started
+
+Make sure your current working directory is this folder.
+
+If you're in [the root of the project](../..), the command would be:
+
+```bash
+cd packages/backend
+```
+
+Alternatively, you can use `yarn workspace toms-shuttles-backend <command>` instead of `yarn <command>` for any command documented below.
 
 ### Choosing a specific port
 
