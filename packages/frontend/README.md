@@ -14,18 +14,25 @@ To start the development server, run:
 yarn dev
 ```
 
-## Run in Production Mode
+## Create Production Build
 
-First build the package by running:
+Build the package by running:
 
 ```bash
 yarn build
 ```
 
-Then start the application in production by running:
+You can then use the path to the production files as the public directory (or copy them over).
 
-```bash
-yarn start
+For use with express:
+
+```javascript
+import assets from 'toms-shuttles-frontend';
+import express from 'express';
+
+const app = express();
+// set express routes here
+app.use(express.static(assets));
 ```
 
 ## Choosing a specific port
