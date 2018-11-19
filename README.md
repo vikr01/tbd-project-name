@@ -58,6 +58,10 @@
 
 ## Getting Started
 
+See [the `master` branch](https://github.com/vikr01/toms-shuttles/tree/master) if you want to use the latest stable version.
+
+See [the `dev` branch](https://github.com/vikr01/toms-shuttles/tree/dev) if you want to use the next in-progress version.
+
 You'll need the following:
 
 - [Node.js with a version `>=10` ](https://nodejs.org/en/download/). (You can also [install Node.js with a package manager](https://nodejs.org/en/download/package-manager/).)
