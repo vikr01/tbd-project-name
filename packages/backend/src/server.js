@@ -195,7 +195,7 @@ export default ({ connection, secret, apiKey, hashFn }: params) => {
       .findOne({ username, password: signature });
     if (!user) {
       return res
-        .status(HttpStatus.NOT_FOUND)
+        .status(HttpStatus.BAD_REQUEST)
         .send('Invalid username and/or password provided.');
     }
 
