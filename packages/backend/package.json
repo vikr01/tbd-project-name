@@ -19,8 +19,7 @@
     "postinstall": "node -r @babel/register scripts/postinstall.js",
     "prestart": "yarn run stop",
     "start": "cross-env NODE_ENV=production forever dist/index.js",
-    "stop": "forever stop dist/app.js; exit 0",
-    "test": "cross-env NODE_ENV=test jest"
+    "stop": "forever stop dist/app.js; exit 0"
   },
   "dependencies": {
     "axios": "^0.18.0",
