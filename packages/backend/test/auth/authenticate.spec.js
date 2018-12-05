@@ -3,7 +3,7 @@ import { createConnection } from 'typeorm';
 import request from 'supertest';
 import HttpStatus from 'http-status-codes';
 import server from 'toms-shuttles-backend/src/server';
-import routes from 'toms-shuttles-backend/routes';
+import routes from 'toms-shuttles-backend/lib/routes';
 import { apiKey, hashFn } from 'toms-shuttles-backend/src/envVars/parse';
 import connectionOptions from '../helpers/dbConfig';
 
