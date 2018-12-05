@@ -4,9 +4,13 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import backendRoutes from 'toms-shuttles-backend/lib/routes';
 import HttpStatus from 'http-status-codes';
+import io from 'socket.io-client';
+import ioEvents from 'toms-shuttles-backend/lib/io-events';
 import Prompt from './Prompt';
 import CreateAccount from '../CreateAccount';
 import routes from '../../routes';
+
+const socket = io();
 
 const signinStatusEnums = {
   ok: 0,
@@ -98,6 +102,7 @@ export default class SignInController extends Component {
     }
     console.log(response);
     this.setState({ signinStatus: signinStatusEnums.ok });
+    socket.emit(ioEvents.LOGGED_IN, { username });
   };
 
   sendSignupRequest = async (

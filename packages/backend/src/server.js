@@ -29,20 +29,22 @@ type params = {
 // this is where the app lifts
 export default ({ connection, secret, apiKey, hashFn, io }: params) => {
   const app = express();
-  const ioMiddlewares = {};
-  const usernameToSockets = {};
-  const usernameToMainSocket = {};
 
-  io.on('connect', socket => {
+  io.on('connection', socket => {
     socket.on(ioEvents.LOGGED_IN, ({ username }) => {
       socket.username = username;
+    });
 
-      if (!usernameToSockets[username]) {
-        usernameToSockets[username] = {};
+    socket.on(ioEvents.DISCONNECT, () => {
+      const { username } = socket;
+      if (!username) {
+        return;
       }
 
-      const { [username]: matchingUsernameSockets } = usernameToSockets;
-      matchingUsernameSockets.push(socket);
+      logout({ connection, username }).catch(err => {
+        console.error('Unable to log user out after they disconnected.');
+        throw err;
+      });
     });
   });
 
@@ -79,7 +81,7 @@ export default ({ connection, secret, apiKey, hashFn, io }: params) => {
     const { username } = req.session;
 
     try {
-      logout({ connection, username });
+      await logout({ connection, username });
     } catch (err) {
       return res.status(HttpStatus.IM_A_TEAPOT).send(err);
     }
@@ -628,5 +630,5 @@ export default ({ connection, secret, apiKey, hashFn, io }: params) => {
   // this sets the public directory to the frontend package's build directory
   app.use(express.static(assets));
 
-  return { app, ioMiddlewares };
+  return app;
 };
