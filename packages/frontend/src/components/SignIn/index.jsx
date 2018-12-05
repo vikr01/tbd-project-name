@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import backendRoutes from 'toms-shuttles-backend/routes';
+import backendRoutes from 'toms-shuttles-backend/lib/routes';
 import HttpStatus from 'http-status-codes';
 import Prompt from './Prompt';
 import CreateAccount from '../CreateAccount';
